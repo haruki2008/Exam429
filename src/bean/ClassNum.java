@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class ClassNum implements Serializable {
 
 	/**
-	 * 学校:School
+	 * 学校:School_a
 	 */
 	private School school;
 
