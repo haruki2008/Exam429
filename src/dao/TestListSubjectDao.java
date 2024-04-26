@@ -51,7 +51,7 @@ public class TestListSubjectDao extends Dao{
 	    //リザルトセット
 	    ResultSet rSet = null;
 	    //SQL文の条件
-	    String condition = "WHERE STUDENT.ENT_YEAR = ? AND STUDENT.CLASS_NUM = ? AND TEST. = ? AND TEST.COUNT = ?";
+	    String condition = "WHERE STUDENT.ENT_YEAR = ? AND STUDENT.CLASS_NUM = ? AND TEST.NAME = ? AND TEST.COUNT = ?";
 	    //SQL文のソート
 	    String order = " order by no asc";
 

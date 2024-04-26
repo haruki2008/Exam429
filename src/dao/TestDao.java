@@ -109,25 +109,25 @@ public class TestDao extends Dao{
 	    //リザルトセット
 	    ResultSet rSet = null;
 	    //SQL文の条件
-	    String condition = " and ent_year =? and class_num =? and subject =? and num = ?";
+	    String condition = " ent_year =? and class_num =? and subject_cd =?";
 	    //SQL文のソートー
 	    String order = " order by no asc";
 
-	    // SQL文の在学フラグ条件
-	    String conditionIsAttend = "";
 
 	    try {
 		    //プリペアードステートメントにSQL文をセット
-		    statement = connection. prepareStatement (baseSql + condition + conditionIsAttend + order);
-		    //プリペアードステートメントに学校コードをバインド
-		    statement. setString(1, school. getCd ());
-		    // プリペアードステートメントに入学年度をバインド
-		    statement. setInt (2, entYear) ;
-		    //プリペアードステートメントにクラス番号をバインド
-		    statement. setString(3, classNum) ;
+		    statement = connection. prepareStatement (baseSql + condition + order);
+		    //プリペアードステートメントに入学年度をバインド
+		    statement. setInt (1, entYear) ;
+		  //プリペアードステートメントにクラス番号をバインド
+		    statement. setString(2, classNum) ;
+		    //プリペアードステートメントに科目コードをバインド
+		    statement. setString(3, subject. getCd ());
+		    
+		    
 		    // プライベートステートメントを実行
 		    rSet = statement.executeQuery ();
-		    //帰ってきたResultSet型をStudent型に変えて結果をセットする
+		    //帰ってきたResultSet型をtest型に変えて結果をセットする
 		    list = postFilter(rSet,school);
 		} catch (Exception e) {
 			throw e;

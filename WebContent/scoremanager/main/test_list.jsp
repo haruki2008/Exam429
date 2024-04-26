@@ -33,8 +33,8 @@
 		<select name="sub_name">
 			<option value="0">--------</option>
 			<c:forEach var="sub" items="${subject_set}">
-				<%-- 現在のyearと選択されていたent_yearが一致していた場合selectedを追記 --%>
-				<option value="${sub.name}" <c:if test="${sub.name==sub_name}">selected</c:if>>${sub.name}</option>
+				<%-- 表記は科目名が出ているけど実際に送られるものは科目コードが送られる --%>
+				<option value="${sub.cd}" <c:if test="${sub.name==sub_name}">selected</c:if>>${sub.name}</option>
 			</c:forEach>
 		</select>
 
