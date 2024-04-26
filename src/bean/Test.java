@@ -2,8 +2,6 @@ package bean;
 
 import java.io.Serializable;
 
-import javax.security.auth.Subject;
-
 public class Test implements Serializable{
 
 	private Student student;
@@ -11,7 +9,7 @@ public class Test implements Serializable{
 	private String classNum;
 	private int no;
 	private int point;
-	private Subject subject;
+	private bean.Subject subject;
 
 	public Student getStudent() {
 		return student;
@@ -43,10 +41,10 @@ public class Test implements Serializable{
 	public void setPoint(int point) {
 		this.point = point;
 	}
-	public Subject getSubject() {
+	public bean.Subject getSubject() {
 		return subject;
 	}
-	public void setSubject(Subject subject) {
+	public void setSubject(bean.Subject subject) {
 		this.subject = subject;
 	}
 
