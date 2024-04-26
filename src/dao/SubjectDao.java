@@ -85,7 +85,7 @@ public class SubjectDao extends Dao{
 				Subject subject = new Subject();
 				//科目名をセットする;
 				subject.setName(rSet. getString("name"));
-				subject.setCd(rSet.getString("name"));
+				subject.setCd(rSet.getString("cd"));
 				subject.setSchool(school);
 				//リストに追加
 				list.add(subject);

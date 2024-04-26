@@ -30,11 +30,11 @@
 		</select>
 
 		<label>科目</label>
-		<select name="sub_cd">
+		<select name="sub_name">
 			<option value="0">--------</option>
 			<c:forEach var="sub" items="${subject_set}">
 				<%-- 表記は科目名が出ているけど実際に送られるものは科目コードが送られる --%>
-				<option value="${sub.cd}" <c:if test="${sub.cd==sub_cd}">selected</c:if>>${sub.name}</option>
+				<option value="${sub.cd}" <c:if test="${sub.name==sub_name}">selected</c:if>>${sub.name}</option>
 			</c:forEach>
 		</select>
 
@@ -42,6 +42,39 @@
 
 		<input type="submit" value="検索">
 	</form>
+	<c:choose>
+		<c:when test="${scores.size()>0}">
+			<div>科目：${sub.getName()}</div>
+
+			<table class="table table-hover">
+				<tr>
+					<th>入学年度</th>
+					<th>クラス</th>
+					<th>学生番号</th>
+					<th>氏名</th>
+					<th>１回</th>
+					<th>２回</th>
+					<th></th>
+					<th></th>
+				</tr>
+				<c:forEach var="score" items="${scores}">
+					<tr>
+						<td>${score.entYear}</td>
+						<td>${score.classNum}</td>
+						<td>${score.studentNo}</td>
+						<td>${score.studentName}</td>
+						<td>${score.points.get('1')}</td>
+						<td>${score.points.get('2')}</td>
+						<td class="text-center">
+						</td>
+					</tr>
+				</c:forEach>
+			</table>
+		</c:when>
+		<c:otherwise>
+			<div>成績情報が存在しませんでした</div>
+		</c:otherwise>
+	</c:choose>
 
 	<a href="#">戻る</a>
 

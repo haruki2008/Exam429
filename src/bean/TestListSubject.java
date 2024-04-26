@@ -4,22 +4,22 @@ import java.util.Map;
 
 public class TestListSubject {
 	//変数宣言
-	private int entYear;
-	private String no;
-	private String studentName;
-	private String classNum;
-	private Map<Integer,Integer> points;
+	private int entYear;//入学年度
+	private String studentNo;//学生番号
+	private String studentName;//氏名
+	private String classNum;//クラス番号
+	private Map<Integer,Integer> points;//点数
 	public int getEntYear() {
 		return entYear;
 	}
 	public void setEntYear(int entYear) {
 		this.entYear = entYear;
 	}
-	public String getno() {
-		return no;
+	public String getstudentNo() {
+		return studentNo;
 	}
-	public void setno(String no) {
-		this.no = no;
+	public void setstudentNo(String studentNo) {
+		this.studentNo = studentNo;
 	}
 	public String getStudentName() {
 		return studentName;

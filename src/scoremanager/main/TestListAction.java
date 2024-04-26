@@ -40,7 +40,6 @@ public class TestListAction extends Action{
 		SubjectDao SubDao = new SubjectDao();
 		List<Subject> sublist = SubDao.filter(teacher.getSchool());
 
-		System.out.println(sublist);
 		//Subject型の中の科目名をString型のリストに格納
 
 		//科目データをリクエスト属性にセット

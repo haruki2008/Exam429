@@ -25,7 +25,7 @@ public class TestListSubjectDao extends Dao{
 				//学生インスタンスに検索結果をセット
 				testlistsubject.setClassNum(rSet.getString("class_num"));
 				testlistsubject.setEntYear(rSet. getInt("ent_year"));
-				testlistsubject.setno(rSet.getString("no"));
+				testlistsubject.setstudentNo(rSet.getString("student_no"));
 				testlistsubject.setStudentName(rSet. getString("name"));
 				//pointをセット
 				//リストに追加
@@ -37,9 +37,9 @@ public class TestListSubjectDao extends Dao{
 		return list;
 	}
 	//共通部分のSQL文
-	private String baseSql = "SELECT ENT_YEAR,STUDENT.CLASS_NUM,STUDENT.NO,NAME,POINT "
-			+ "FROM STUDENT INNER JOIN TEST "
-			+ "ON STUDENT.NO = TEST.NO";
+	private String baseSql = "SELECT ENT_YEAR,TEST.CLASS_NUM,STUDENT_NO,NAME,TEST.NO,POINT "
+			+ "FROM TEST INNER JOIN STUDENT "
+			+ "ON TEST.STUDENT_NO = STUDENT.NO ";
 
 	public List<TestListSubject> filter(int entYear,String classNum,Subject subject,School school) throws Exception {
 		//リストを初期化
@@ -51,7 +51,7 @@ public class TestListSubjectDao extends Dao{
 	    //リザルトセット
 	    ResultSet rSet = null;
 	    //SQL文の条件
-	    String condition = "WHERE STUDENT.ENT_YEAR = ? AND STUDENT.CLASS_NUM = ? AND TEST.NAME = ? AND TEST.COUNT = ?";
+	    String condition = "WHERE STUDENT.ENT_YEAR = ? AND TEST.CLASS_NUM = ? AND TEST.SUBJECT_CD = ? AND TEST.SCHOOL_CD = ?";
 	    //SQL文のソート
 	    String order = " order by no asc";
 
@@ -59,15 +59,12 @@ public class TestListSubjectDao extends Dao{
 		    //プリペアードステートメントにSQL文をセット
 		    statement = connection. prepareStatement (baseSql + condition + order);
 		    //プリペアードステートメントに入学年度をバインド
-		    statement. setInt(1, entYear);
-		    // プリペアードステートメントにクラス番号をバインド
+		    statement. setInt(1, entYear);		    // プリペアードステートメントにクラス番号をバインド
 		    statement. setString (2, classNum) ;
 		    //プリペアードステートメントに科目名をバインド
-		    statement. setString(3, subject.getName()) ;
+		    statement. setString(3, subject.getCd()) ;
 		    //プリペアードステートメントに回数をバインド
-
-
-
+		    statement. setString(4, school.getCd());
 		    // プライベートステートメントを実行
 		    rSet = statement.executeQuery ();
 		    //帰ってきたResultSet型を型に変えて結果をセットする

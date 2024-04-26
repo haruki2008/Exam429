@@ -1,6 +1,8 @@
 package scoremanager.main;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,17 +31,21 @@ public class TestListSubjectExecuteAction extends Action{
 		int entYear;//入力された入学年度
 		entYear = Integer.parseInt(req.getParameter("ent_year"));//入学年度
 
+		Map<String, String> errors = new HashMap<>();// エラーメッセージ
+
 		String classNum = "";//入力されたクラス番号
 		classNum = req.getParameter("class_num");
 
 
 		String subStr = "";//入力された科目
-		subStr = req.getParameter("sub_name");//例：A01
+		subStr = req.getParameter("sub_cd");//例：A01
 		//sub_nameと一致するデータをDBから引っ張る
 		SubjectDao subDao = new SubjectDao();
 		Subject subject = new Subject();
+
 		//SubjectDaoのfilterメソッドを使ってJSPから引っ張ってきたデータをもとにSubject型の変数を取得
 		subject = subDao.get(subStr, subject.getSchool());
+
 
 		School school = new School();
 		HttpSession session = req.getSession();//セッション
@@ -48,9 +54,18 @@ public class TestListSubjectExecuteAction extends Action{
 		//ログイン中の先生の所属校コードからSchool型のインスタンスを取得
 		school = sDao.get(teacher.getSchool().getCd());
 
+
 		//入学年度、クラス番号、科目名をもとに成績一覧を作成（入学年度、クラス、学生番号、氏名、回数）
 		TestListSubjectDao TLSDao = new TestListSubjectDao();
 		List<TestListSubject> list = TLSDao.filter(entYear,classNum,subject,school);
+		//選択された科目を表示するためリクエストに科目リストをセット
+		req.setAttribute("sub", subject);
+		// リクエストに成績リストをセット
+		req.setAttribute("scores",list);
+
+		//JSPへフォワード
+		req.getRequestDispatcher("test_list_student.jsp").forward(req, res);
+
 
 	}
 }
