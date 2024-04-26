@@ -1,5 +1,6 @@
 package bean;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class TestListSubject {
@@ -8,7 +9,7 @@ public class TestListSubject {
 	private String studentNo;//学生番号
 	private String studentName;//氏名
 	private String classNum;//クラス番号
-	private Map<Integer,Integer> points;//点数
+	private Map<Integer,Integer> points = new HashMap<>();
 	public int getEntYear() {
 		return entYear;
 	}
@@ -39,7 +40,12 @@ public class TestListSubject {
 	public void setPoints(Map<Integer, Integer> points) {
 		this.points = points;
 	}
-
+	public int getPoint(int key) {
+		return points.get(key);
+	}
+	public void putPoint(int key,int value) {
+		points.put(key, value);
+	}
 	//ゲッター、セッター
 
 
