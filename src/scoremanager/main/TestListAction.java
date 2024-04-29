@@ -48,6 +48,7 @@ public class TestListAction extends Action{
 		entYearStr = req.getParameter("ent_year");//入力された入学年度
 		classNum = req.getParameter("class_num");
 
+
 		if (entYearStr != null){
 			entYear = Integer.parseInt(entYearStr);//入学年度
 			}
@@ -59,8 +60,10 @@ public class TestListAction extends Action{
 			//入学年度、クラス番号、科目名をもとに成績一覧を作成（入学年度、クラス、学生番号、氏名、回数）
 			TestListSubjectDao TLSDao = new TestListSubjectDao();
 			List<TestListSubject> list = TLSDao.filter(entYear,classNum,subject,school);
+
 			// リクエストに成績リストをセット
 			req.setAttribute("scores",list);
+			System.out.println(list);
 			//選択された科目を表示するためリクエストに科目リストをセット
 			req.setAttribute("sub", subject);
 			} else {

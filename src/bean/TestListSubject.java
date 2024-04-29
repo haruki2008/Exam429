@@ -43,7 +43,7 @@ public class TestListSubject {
 	public int getPoint(int key) {
 		return points.get(key);
 	}
-	public void putPoint(int key,int value) {
+	public void putPoints(int key,int value) {
 		points.put(key, value);
 	}
 	//ゲッター、セッター

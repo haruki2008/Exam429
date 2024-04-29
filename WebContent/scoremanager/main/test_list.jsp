@@ -63,7 +63,6 @@
 						<td>${score.studentNo}</td>
 						<td>${score.studentName}</td>
 						<td>${score.getPoint(1)}</td>
-						<td>${score.points.get('2')}</td>
 						<td class="text-center">
 						</td>
 					</tr>
