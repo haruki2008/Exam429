@@ -36,7 +36,7 @@
 			</c:forEach>
 		</select>
 
-		<div>${errors.get("sub_name")}</div>
+		<div>${errors.get("ent_year")}</div>
 
 		<input type="submit" value="検索">
 	</form>
@@ -70,7 +70,8 @@
 			</table>
 		</c:when>
 		<c:otherwise>
-			<div>成績情報が存在しませんでした</div>
+			<c:if test="${scores == null}">検索してください</c:if>
+			<c:if test="${scores.size() == 0}"><div>成績情報が存在しませんでした</div></c:if>
 		</c:otherwise>
 	</c:choose>
 

@@ -63,7 +63,6 @@ public class TestListAction extends Action{
 
 			// リクエストに成績リストをセット
 			req.setAttribute("scores",list);
-			System.out.println(list);
 			//選択された科目を表示するためリクエストに科目リストをセット
 			req.setAttribute("sub", subject);
 			} else {
