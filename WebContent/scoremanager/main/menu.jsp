@@ -11,7 +11,7 @@
 <h2>メニュー</h2>
 
 <a href="StudentList.action">学生管理</a>
-<a href="#">成績登録</a>
+<a href="TestRegist.action">成績登録</a>
 <a href="TestList.action">成績参照</a>
 <a href="#">科目管理</a>
 
