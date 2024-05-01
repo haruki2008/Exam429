@@ -63,6 +63,9 @@
 						<td>${score.studentNo}</td>
 						<td>${score.studentName}</td>
 						<td>${score.getPoint(1)}</td>
+						<c:if test="${score.getPoint(2) == -1}"><td>-</td></c:if>
+						<c:if test="${score.getPoint(2) != -1}"><td>${score.getPoint(2)}</td></c:if>
+						<%--もし2回目のテストの点数が存在していたら点数を表示していなかったら‐を表示 --%>
 						<td class="text-center">
 						</td>
 					</tr>

@@ -46,7 +46,11 @@ public class TestListSubject {
 	public void putPoints(int key,int value) {
 		points.put(key, value);
 	}
+
 	//ゲッター、セッター
+	public void removePoints(int key) {
+		points.remove(key);
+	}
 
 
 }
