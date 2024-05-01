@@ -269,4 +269,75 @@ public class SubjectDao extends Dao {
 
 	}
 
+
+
+
+	public boolean save(Subject subject) throws Exception {
+		// TODO 自動生成されたメソッド・スタブ
+
+		//コネクションを確立
+	    Connection connection = getConnection();
+	    //プリペアードステートメント
+	    PreparedStatement statement = null;
+	    //実行件数
+	    int count = 0;
+
+	    try{
+	        //データベースから学生を取得
+	        Subject data = get (subject. getSubjectCd ());
+	        if (data == null) {
+	            //科目IDが存在しなかった場合
+	            //プリペアードステートメンにINSERT文をセット
+	            statement = connection. prepareStatement (
+	            "insert into subject (school_cd, cd, name) values(?, ?, ?)");
+	            //プリペアードステートメントに値をバインド
+	            statement. setString(1, subject. getSchool (). getCd ());
+	            statement. setString (2, subject. getSubjectCd ());
+	            statement. setString (3, subject. getName ());
+
+
+	        } else {
+	            //学生が存在した場合
+	            //プリペアードステートメントにUPDATE文をセット
+	            statement = connection
+	            		.prepareStatement (
+	                "update subject set cd =?, name =?");
+	            //プリペアードステートメントに値をバインド
+	            statement. setString(1, subject. getSubjectCd ());
+	            statement. setString (2, subject. getName ());
+
+	        }
+	        //プリペアードステートメントを実行
+	        count = statement. executeUpdate ();
+
+	    } catch (Exception e) {
+	        throw e;
+	    } finally {
+	        //
+	        if(statement != null) {
+	            try {
+	                statement.close();
+	            } catch (SQLException sqle) {
+	                throw sqle;
+	            }
+	        }
+
+	        if(connection != null) {
+	            try {
+	                connection.close();
+	            } catch (SQLException sqle) {
+	                throw sqle;
+	            }
+	        }
+	    }
+
+	    if (count > 0) {
+	        // 実行件数が1件以上ある場合
+	        return true;
+	        } else {
+	        //実行件数が0件の場合
+	        return false;
+	        }
+	}
+
 }
