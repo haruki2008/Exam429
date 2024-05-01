@@ -39,12 +39,15 @@
 					<th>科目名</th>
 					<th></th>
 				</tr>
-				<c:forEach var="subjects" items="${subjects}">
-					<tr>
-						<td>${subjects.cd}</td>
-						<td>${subjects.name}</td>
 
-						<td><a href="SubjectUpdate.action?cd=${subjects.cd}">変更</a></td>
+				<c:forEach var="subject" items="${subjects}">
+					<tr>
+<!--  -->
+						<td>${subject.subjectCd}</td>
+
+						<td>${subject.name}</td>
+
+						<td><a href="SubjectUpdate.action?cd=${subject.subjectCd}">変更</a></td>
 					</tr>
 				</c:forEach>
 			</table>

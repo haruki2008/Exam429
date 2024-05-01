@@ -75,6 +75,10 @@ public class SubjectListAction extends Action {
 		req.setAttribute("set_sub_list", list);
 
 		//JSPへフォワード 7
+
+		System.out.println(subjects);
+		System.out.println(list);
+
 		req.getRequestDispatcher("subject_list.jsp").forward(req, res);
 
 	}

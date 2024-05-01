@@ -12,20 +12,21 @@ import bean.Subject;
 
 public class SubjectDao extends Dao {
 
-	public Subject get(String cd) throws Exception {
-		// 科目インスタンスを初期化
-		Subject subject = new Subject();
+	public Subject get(String subjectCd) throws Exception {
+
 		// データベースへのコネクションを確立
 		Connection connection = getConnection();
 		// プリペアードステートメント
 		PreparedStatement statement = null;
+		// 科目インスタンスを初期化
+		Subject subject = new Subject();
 
 		try {
 			// プリペアードステートメントにSQL文をセット
 			statement = connection.prepareStatement(
-					"select * from school where cd=?");
+					"select * from subject where cd=?");
 			// プリペアードステートメントにをバインド
-			statement.setString(1, cd);
+			statement.setString(1, subjectCd);
 			// プリペアードステートメントを実行
 			ResultSet rSet = statement.executeQuery();
 
@@ -72,7 +73,7 @@ public class SubjectDao extends Dao {
 		return subject;
 	}
 
-	private String baseSql = "select * from subject where cd=? ";
+	private String baseSql = "select * from subject where school_cd=? ";
 
 	private List<Subject> postFilter(ResultSet rSet, School school) throws Exception {
 //		//まずはここに処理追加
@@ -125,7 +126,7 @@ public class SubjectDao extends Dao {
 		    //プリペアードステートメントにSQL文をセット
 		    statement = connection. prepareStatement (baseSql + condition + order);
 		    //プリペアードステートメントに学校コードをバインド
-		    statement. setString(1, school. getCd ());
+		    statement. setString(1, school.getCd ());
 		    // プリペアードステートメントに科目IDをバインド
 		    statement. setString(2, cd) ;
 
@@ -176,14 +177,15 @@ public class SubjectDao extends Dao {
 	    //リザルトセット
 	    ResultSet rSet = null;
 	    //SQL文のソート
-	    String order = " order by cd asc";
+//	    String order = " order by cd asc";
 
 
 	    try {
 		    //プリペアードステートメントにSQL文をセット
-		    statement = connection. prepareStatement (baseSql + order);
-		    //プリペアードステートメントに学校コードをバインド
-		    statement. setString(1, school. getCd ());
+//		    statement = connection. prepareStatement (baseSql + order);
+		    statement = connection. prepareStatement (baseSql);
+					    //プリペアードステートメントに学校コードをバインド
+		    statement. setString(1, school.getCd());
 		    // プライベートステートメントを実行
 		    rSet = statement.executeQuery ();
 		    list = postFilter(rSet,school);
