@@ -41,6 +41,11 @@
 		<input type="submit" value="検索">
 	</form>
 
+	<form method = "get">
+		<label>学生番号</label>
+		<input type="text" name="student_no" placeholder="学生番号を入力してください">
+		<input type="submit" value="検索">
+	</form>
 	<c:choose>
 		<c:when test="${scores.size()>0}">
 			<div>科目：${sub.getName()}</div>
@@ -75,6 +80,25 @@
 		<c:otherwise>
 			<c:if test="${scores == null}">検索してください</c:if>
 			<c:if test="${scores.size() == 0}"><div>成績情報が存在しませんでした</div></c:if>
+			<c:if test="${stuscores != null}">
+				<table class="table table-hover">
+				<tr>
+					<th>科目名</th>
+					<th>科目コード</th>
+					<th>回数</th>
+					<th>点数</th>
+				</tr>
+				<c:forEach var="stuscore" items="${stuscores}">
+					<tr>
+						<td>${stuscore.subjectName}</td>
+						<td>${stuscore.subjectCd}</td>
+						<td>${stuscore.num}</td>
+						<td>${stuscore.point}</td>
+						<td class="text-center">
+						</td>
+					</tr>
+				</c:forEach>
+			</c:if>
 		</c:otherwise>
 	</c:choose>
 
