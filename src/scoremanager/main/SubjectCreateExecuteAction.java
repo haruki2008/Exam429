@@ -43,8 +43,7 @@ public class SubjectCreateExecuteAction extends Action {
 
 		// ログインユーザーの学校コードをもとに科目IDの一覧を取得
 		List<String> list = sDao.filter2(teacher.getSchool());
-		// ログインユーザーの学校コードをもとに科目名の一覧を取得
-		List<String> nameList = sDao.filter3(teacher.getSchool());
+
 
 
 		//ビジネスロジック 4

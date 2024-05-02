@@ -429,14 +429,14 @@ public class SubjectDao extends Dao {
 	            //プリペアードステートメントにUPDATE文をセット
 	            statement = connection
 	            		.prepareStatement (
-	                "update subject set cd =?, name =?");
+	                "update subject set name =? where cd = ? ");
 	            //プリペアードステートメントに値をバインド
-	            statement. setString(1, subject. getSubjectCd ());
-	            statement. setString (2, subject. getName ());
+	            statement. setString(1, subject. getName ());
+	            statement. setString (2, subject. getSubjectCd ());
 
 	        }
 	        //プリペアードステートメントを実行
-	        count = statement. executeUpdate ();
+	        count = statement.executeUpdate();
 
 	    } catch (Exception e) {
 	        throw e;

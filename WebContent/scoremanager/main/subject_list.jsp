@@ -56,6 +56,7 @@
 			<div>科目情報が存在しませんでした</div>
 		</c:otherwise>
 	</c:choose>
+	<a href="menu.jsp">戻る</a>
 
 </body>
 </html>
