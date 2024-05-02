@@ -73,6 +73,71 @@ public class SubjectDao extends Dao {
 		return subject;
 	}
 
+
+	public Subject get2(String subjectName) throws Exception {
+
+		// データベースへのコネクションを確立
+		Connection connection = getConnection();
+		// プリペアードステートメント
+		PreparedStatement statement = null;
+		// 科目インスタンスを初期化
+		Subject subject = new Subject();
+
+		try {
+			// プリペアードステートメントにSQL文をセット
+			statement = connection.prepareStatement(
+					"select * from subject where name=?");
+			// プリペアードステートメントにをバインド
+			statement.setString(1, subjectName);
+			// プリペアードステートメントを実行
+			ResultSet rSet = statement.executeQuery();
+
+			// 学校Daoを初期化
+		    SchoolDao schoolDao = new SchoolDao ();
+
+
+			if (rSet.next()) {
+				// リザルトセットが存在する場合
+
+				// 学校フィールドには学校コードで検索した学校インスタンスをセット
+			    subject.setSchool(schoolDao.get(rSet.getString("school_cd")));
+
+				// 科目インスタンスに検索結果をセット
+				subject.setSubjectCd(rSet.getString("cd"));
+				subject.setName(rSet.getString("name"));
+
+			} else {
+				// 存在しない場合
+				// 科目インスタンスにnullをセット
+				subject = null;
+			}
+
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			// プリペアードステートメントを閉じる
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+			// コネクションを閉じる
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		}
+		return subject;
+	}
+
+
+
+
 	private String baseSql = "select * from subject where school_cd=? ";
 
 	private List<Subject> postFilter(ResultSet rSet, School school) throws Exception {
@@ -163,6 +228,17 @@ public class SubjectDao extends Dao {
 	/**
 	 *
 	 * @param school  //学校
+	 * @param cd  //科目ID
+	 * @return
+	 *      科目のリスト List<Subject> ない場合は空(0件)のリスト
+	 * @throws Exception
+	 */
+
+
+
+	/**
+	 *
+	 * @param school  //学校
 	 * @return
 	 *      科目のリスト List<Subject> ない場合は空(0件)のリスト
 	 * @throws Exception
@@ -213,6 +289,58 @@ public class SubjectDao extends Dao {
 		return list;
 	}
 
+	public List<String> filter3(School school) throws Exception {
+		// 戻り値用のリストを作成
+		// new演算子とArrayListで空のListを用意
+		List<String> list = new ArrayList<>();
+
+		// データベースへのコネクションを確立
+		// データベースに接続された！！
+		Connection connection = getConnection();
+
+		// プリペアードステートメント
+		PreparedStatement statement = null;
+
+		try {
+
+			// プリペアードステートメントにSQL文をセット
+			statement = connection.prepareStatement("select name from subject where school_cd = ?");
+
+			//プレースホルダー（？の部分）に値を設定
+			statement.setString(1,school.getCd());
+
+			// プリペアードステートメントを実行
+			// SQL文を実行する
+			// 結果はリザルトセット型となる
+			ResultSet rSet = statement.executeQuery();
+
+			// リザルトセット（結果）を全件走査
+			while (rSet.next()){
+				// 戻り値用のlistに科目IDを追加
+				list.add(rSet.getString("name"));
+			}
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			// プリペアードステートメントを閉じる
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+			// コネクションを閉じる
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		}
+		return list;
+	}
 
 	public List<String> filter2(School school) throws Exception {
 		// 戻り値用のリストを作成

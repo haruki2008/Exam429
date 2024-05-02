@@ -24,6 +24,9 @@ public class SubjectListAction extends Action {
 
 		String Cd = "";
 
+		String entName = "";
+		String Name = "";
+
 
 		List<Subject> subjects = null;// 科目リスト
 
@@ -32,33 +35,33 @@ public class SubjectListAction extends Action {
 		//リクエストパラメータ―の取得 2
 		entCd = req.getParameter("f1");
 
+		entName = req.getParameter("f2");
+
+
+		if(entName != null){
+			Name = entName;
+		}
+
 		//DBからデータ取得３
 
 		if(entCd != null){
 			Cd = entCd;
 		}
 
-		System.out.println("★1★Go");
-
 		if(Cd.equals("0") || Cd.length() == 0) {
 			// 全科目情報を取得
 			subjects = sDao.filter(teacher.getSchool());
-			System.out.println("★2★All");
-
 		}
 
 		else if (!Cd.equals("0")) {
 			// 科目IDを指定
 			subjects = sDao.filter(teacher.getSchool(), entCd);
-			System.out.println("★3★filter_id");
 		}
-
-
-		System.out.println("★4★out");
-
 
 		// ログインユーザーの学校コードをもとに科目IDの一覧を取得
 		List<String> list = sDao.filter2(teacher.getSchool());
+
+		List<String> nameList = sDao.filter3(teacher.getSchool());
 
 
 		//DBへデータ保存 5
@@ -73,11 +76,9 @@ public class SubjectListAction extends Action {
 		req.setAttribute("subjects", subjects);
 		// リクエストにデータをセット
 		req.setAttribute("set_sub_list", list);
+		req.setAttribute("set_name_list", nameList);
 
 		//JSPへフォワード 7
-
-		System.out.println(subjects);
-		System.out.println(list);
 
 		req.getRequestDispatcher("subject_list.jsp").forward(req, res);
 

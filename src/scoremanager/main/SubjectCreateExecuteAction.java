@@ -1,6 +1,5 @@
 package scoremanager.main;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,12 +24,12 @@ public class SubjectCreateExecuteAction extends Action {
 		String cd = "";//科目ID
 		String name = "";//科目名
 
-		Subject subject = null;//学生
+		Subject subject = null;// 科目ID
+		Subject Name = null;// 科目名
 		Map<String, String> errors = new HashMap<>();// エラーメッセージ
-		SubjectDao sDao = new SubjectDao();// クラス番号Daoを初期化
+		SubjectDao sDao = new SubjectDao();// 科目Daoを初期化
 		Teacher teacher = (Teacher) session.getAttribute("user");// ログインユーザーを取得
 
-		List<Integer> entYearSet = new ArrayList<>();//入学年度のリストを初期化
 
 		//リクエストパラメータ―の取得 2
 
@@ -39,13 +38,25 @@ public class SubjectCreateExecuteAction extends Action {
 
 		//DBからデータ取得 3
 		subject = sDao.get(cd);// 科目IDから科目インスタンスを取得
-		List<String> list = sDao.filter2(teacher.getSchool());// ログインユーザーの学校コードをもとに科目IDの一覧を取得
+		Name = sDao.get2(name);
+
+
+		// ログインユーザーの学校コードをもとに科目IDの一覧を取得
+		List<String> list = sDao.filter2(teacher.getSchool());
+		// ログインユーザーの学校コードをもとに科目名の一覧を取得
+		List<String> nameList = sDao.filter3(teacher.getSchool());
+
 
 		//ビジネスロジック 4
 		//DBへデータ保存 5
 		//条件で手順4~5の内容が分岐
 
-		if (subject == null) {// 科目が未登録だった場合
+		if (subject == null) {// 新規の科目ID
+
+			if(Name != null){
+				errors.put("name", "科目名が重複しています");
+			} else {
+
 			// 科目インスタンスを初期化
 			subject = new Subject();
 			// インスタンスに値をセット
@@ -53,9 +64,10 @@ public class SubjectCreateExecuteAction extends Action {
 			subject.setName(name);
 
 			subject.setSchool(((Teacher)session.getAttribute("user")).getSchool());
-			// 学生を保存
+			// 科目を保存
 			sDao.save(subject);
-		} else {//入力された科目IDがDBに保存されていた場合
+			}
+		} else if(subject != null) {//入力された科目IDがDBに保存されていた場合
 			errors.put("cd", "科目IDが重複しています");
 		}
 
@@ -63,8 +75,8 @@ public class SubjectCreateExecuteAction extends Action {
 		//エラーがあったかどうかで手順6~7の内容が分岐
 		//レスポンス値をセット 6
 		//JSPへフォワード 7
-		req.setAttribute("class_num_set", list);//クラス番号のlistをセット
-		req.setAttribute("ent_year_set", entYearSet);//入学年度のlistをセット
+		req.setAttribute("subject_id_set", list);//科目IDのlistをセット
+
 
 		if(!errors.isEmpty()){
 			// リクエスト属性をセット

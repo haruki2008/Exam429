@@ -25,8 +25,12 @@ public class SubjectCreateAction extends Action {
 		//なし
 
 		//DBからデータ取得 3
-		List<String> list = sDao.filter2(teacher.getSchool());// ログインユーザーの学校コードをもとにクラス番号の一覧を取得
-		System.out.println(list);
+
+		// ログインユーザーの学校コードをもとに科目IDの一覧を取得
+		List<String> list = sDao.filter2(teacher.getSchool());
+		// ログインユーザーの学校コードをもとに科目名の一覧を取得
+		List<String> nameList = sDao.filter3(teacher.getSchool());
+
 
 
 		//DBへデータ保存 5
@@ -34,6 +38,8 @@ public class SubjectCreateAction extends Action {
 
 		//レスポンス値をセット 6
 		req.setAttribute("cd_set", list);//科目IDのlistをセット
+
+		req.setAttribute("name_set", nameList);//科目IDのlistをセット
 
 		//JSPへフォワード 7
 		req.getRequestDispatcher("subject_create.jsp").forward(req, res);
