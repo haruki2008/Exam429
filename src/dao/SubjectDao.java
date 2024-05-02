@@ -184,7 +184,7 @@ public class SubjectDao extends Dao {
 	    //SQL文の条件
 	    String condition = "and cd =? ";
 	    //SQL文のソートー
-	    String order = " order by cd asc";
+	    String order = " order by length (cd) asc";
 
 
 	    try {
@@ -253,13 +253,13 @@ public class SubjectDao extends Dao {
 	    //リザルトセット
 	    ResultSet rSet = null;
 	    //SQL文のソート
-//	    String order = " order by cd asc";
+	    String order = " order by length(cd),cd asc";
 
 
 	    try {
 		    //プリペアードステートメントにSQL文をセット
-//		    statement = connection. prepareStatement (baseSql + order);
-		    statement = connection. prepareStatement (baseSql);
+		    statement = connection. prepareStatement (baseSql + order);
+
 					    //プリペアードステートメントに学校コードをバインド
 		    statement. setString(1, school.getCd());
 		    // プライベートステートメントを実行
