@@ -78,6 +78,9 @@ public class TestListAction extends Action{
 
 		//ユーザが所属している学校の科目データ一覧を取得
 		sublist = SubDao.filter(teacher.getSchool());
+		req.setAttribute("ent_year", entYearStr);
+		req.setAttribute("class_num", classNum);
+		req.setAttribute("subcd", subStr);
 		//クラスデータをリクエスト属性にセット
 		req.setAttribute("class_num_set", classlist);
 		req.setAttribute("ent_year_set", entYearSet);
