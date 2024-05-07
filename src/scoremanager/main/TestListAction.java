@@ -82,6 +82,7 @@ public class TestListAction extends Action{
 
 				//リクエストに成績リストをセット
 				req.setAttribute("stuscores", stulist);
+				req.setAttribute("stu", student);
 
 			}
 

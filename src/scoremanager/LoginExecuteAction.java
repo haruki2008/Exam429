@@ -1,5 +1,8 @@
 package scoremanager;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -27,13 +30,26 @@ public class LoginExecuteAction extends Action{
 
 		//ビジネスロジック 4
 
-		// 認証済みフラグを立てる
-		teacher.setAuthenticated(true);
 
-		//Sessionを有効にする
-		HttpSession session = req.getSession(true);
-		//セッションに"user"という変数名で値はTeacher変数の中身
-		session.setAttribute("user", teacher);
+
+		if (teacher != null) {
+			// 認証済みフラグを立てる
+			teacher.setAuthenticated(true);
+			//Sessionを有効にする
+			HttpSession session = req.getSession(true);
+			//セッションに"user"という変数名で値はTeacher変数の中身
+			session.setAttribute("user", teacher);
+			//リダイレクト
+			url = "main/Menu.action";
+			res.sendRedirect(url);
+		} else {
+			Map<String, String> errors = new HashMap<>();// エラーメッセージ
+			errors.put("1", "ログインに失敗しました。IDまたはPasswardが違います。");
+			req.setAttribute("errors", errors);
+			url = "login.jsp";
+			req.getRequestDispatcher(url).forward(req, res);
+		}
+
 
 		//DBへデータ保存 5
 		//なし
@@ -42,9 +58,7 @@ public class LoginExecuteAction extends Action{
 		//JSPへフォワード 7
 		//req.getRequestDispatcher("main/Menu.action").forward(req, res);
 
-		//リダイレクト
-		url = "main/Menu.action";
-		res.sendRedirect(url);
+
 	}
 
 }

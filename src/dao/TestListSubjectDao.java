@@ -63,7 +63,8 @@ public class TestListSubjectDao extends Dao{
 		    //プリペアードステートメントにSQL文をセット
 		    statement = connection. prepareStatement (baseSql + condition + order);
 		    //プリペアードステートメントに入学年度をバインド
-		    statement. setInt(1, entYear);		    // プリペアードステートメントにクラス番号をバインド
+		    statement. setInt(1, entYear);
+		    // プリペアードステートメントにクラス番号をバインド
 		    statement. setString (2, classNum) ;
 		    //プリペアードステートメントに科目名をバインド
 		    statement. setString(3, subject.getCd()) ;
