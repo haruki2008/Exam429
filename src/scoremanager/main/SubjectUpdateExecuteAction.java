@@ -36,24 +36,20 @@ public class SubjectUpdateExecuteAction extends Action {
 
 		//DBからデータ取得 3
 		Subject subject = sDao.get(cd);// 科目IDから科目インスタンスを取得
-		List<String> list = sDao.filter2(teacher.getSchool());//ログインユーザーの学校コードをもとに科目IDの一覧を取得
+		List<String> list = sDao.filter2(teacher.getSchool());//ログインユーザーの学校コードをもとにクラス番号の一覧を取得
 
 		//ビジネスロジック 4
 		//DBへデータ保存 5
 		//条件で4～5が分岐
 		if (subject != null) {
-
-			//入力した科目名がDBに登録されている
-			if(Name != null){
-				errors.put("name", "入力した科目名は既に登録済みです");
+			// 科目が存在していた場合
+			// インスタンスに値をセット
+			if(Name == null){
+				errors.put("name","その科目名は登録済みです");
 			} else {
-
-				// 学生が存在していた場合
-				// インスタンスに値をセット
-				subject.setSubjectCd(cd);
 				subject.setName(name);
-
-				// 科目を保存
+				subject.setSubjectCd(cd);
+				// 学生を保存
 				sDao.save(subject);
 			}
 		} else {
@@ -68,14 +64,12 @@ public class SubjectUpdateExecuteAction extends Action {
 		if(!errors.isEmpty()){//エラーがあった場合、更新画面へ戻る
 			// リクエスト属性をセット
 			req.setAttribute("errors", errors);
-
-			req.setAttribute("cd", cd);
 			req.setAttribute("name", name);
-
-			req.getRequestDispatcher("subject_update.jsp").forward(req, res);
+			req.setAttribute("cd", cd);
+			req.getRequestDispatcher("student_update.jsp").forward(req, res);
 			return;
 		}
 
-		req.getRequestDispatcher("subject_update_done.jsp").forward(req, res);
+		req.getRequestDispatcher("subject_delete_done.jsp").forward(req, res);
 	}
 }
