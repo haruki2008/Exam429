@@ -2,7 +2,9 @@ package scoremanager.main;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -42,6 +44,7 @@ public class TestRegistAction extends Action{
 		Subject sub = new Subject();
 		TestDao tDao = new TestDao();
 		SchoolDao scDao = new SchoolDao();
+		Map<String, String> errors = new HashMap<>();// エラーメッセージ
 
 
 
@@ -72,7 +75,7 @@ public class TestRegistAction extends Action{
 			no = Integer.parseInt(num);
 		}
 
-		if (entYear != 0 && classNum != "" ) {
+		if (entYear != 0 && classNum != "0" && subjectStr != "0" && no != 0) {
 
 			school = scDao.get(teacher.getSchool().getCd());
 
@@ -108,7 +111,14 @@ public class TestRegistAction extends Action{
 		}
 
 		//DBへデータ保存 5
-		//なし
+
+		if (entYear == 0 || classNum == "0" || subjectStr == "0" || no == 0 ){
+			errors.put("f1", "入学年度とクラスと科目と回数を選択してください");
+			req.setAttribute("errors", errors);
+		}
+
+
+
 		//レスポンス値をセット 6
 
 		req.setAttribute("f1", entYear);

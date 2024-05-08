@@ -57,32 +57,33 @@
 	<c:choose>
 		<c:when test="${tests.size()>0}">
 			<h2>科目：${subject.getName()}（${num}回）</h2>
-
-			<table class="table table-hover">
+				<table class="table table-hover">
 				<tr>
-					<th>入学年度</th>
-					<th>クラス</th>
-					<th>学生番号</th>
-					<th>氏名</th>
-					<th>点数</th>
-				</tr>
-				<c:forEach var="test" items="${tests}">
-					<tr>
-						<td>${test.getStudent().getEntYear()}</td>
-						<td>${test.class_num}</td>
-						<td>${test.student_no}</td>
-						<td>${test.getStudent().getName()}</td>
-						<tb><input name= "point_${test.student_no}" type="text">${test.point}</input>
-						</tb>
-					</tr>
-				</c:forEach>
+				<th>入学年度</th>
+				<th>クラス</th>
+				<th>学生番号</th>
+				<th>氏名</th>
+				<th>点数</th>
+			</tr>
+			<%-- 取得したテスト結果の表示 --%>
+			<c:forEach var="test" items="${tests}">
+			<tr>
+				<td>${test.student.entYear}</td>
+				<td>${test.classNum}</td>
+				<td>${test.student.no}</td>
+				<td>${test.student.name}</td>
+				<td>
+
+
+				<input type="text" name="point_${test.student.no}" value=" ${test.point}"/>
+				<div>${errors.get("test_error")}</div>
+
+				</td>
+			</tr>
+			</c:forEach>
 			</table>
-			<input type="button">登録して終了</input>
+			<input type="submit" onclick="TestRegistExecute.action" value="登録して終了"></form>
 		</c:when>
-		<c:otherwise>
-			<c:if test="${tests == null}">検索してください</c:if>
-			<c:if test="${tests.size() == 0}"><div>成績情報が存在しませんでした</div></c:if>
-		</c:otherwise>
 	</c:choose>
 
 </body>
