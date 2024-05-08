@@ -29,15 +29,25 @@
 
 	<!-- パスワード -->
 	<label>パスワード</label>
-	<input type="password" name="password" value="password">
+	<input type="password" id=password  name="password" value="password">
 
-	<!-- 名前 -->
-	<label>名前</label>
-	<input type="text" name="namae" value="大原花子">
+	<!-- パスワード表示チェックボックス -->
+	<input type="checkbox" id="showPassword" onchange="togglePasswordVisibility()" />
+	<label for="showPassword">パスワードを表示する</label>
+	<script>
+			function togglePasswordVisibility() {
+				let passwordInput = document.getElementById("password");
+				let showPasswordCheckbox = document.getElementById("showPassword");
 
-	<!-- 学校コード -->
-	<label>学校コード</label>
-	<input type="text" name="school_cd" value="knz">
+				if (showPasswordCheckbox.checked) {
+					passwordInput.type = "text";
+				} else {
+					passwordInput.type = "password";
+				}
+			}
+
+
+ 	 </script>
 
 	<!-- ログイン用ボタン -->
 	<input type="submit" name="login" value="ログイン"/>
