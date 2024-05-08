@@ -54,7 +54,6 @@ public class TestListAction extends Action{
 		entYearStr = req.getParameter("ent_year");//入力された入学年度
 		classNum = req.getParameter("class_num");
 		stunumStr = req.getParameter("student_no");//入力された学生番号
-
 		//科目、クラスで検索する場合
 		if (stunumStr == null) {
 			//検索の条件に入力漏れがあった場合
@@ -101,12 +100,12 @@ public class TestListAction extends Action{
 			entYearSet.add(i);
 		}
 
-		System.out.println(subject.getName());
+
 		//ユーザが所属している学校の科目データ一覧を取得
 		sublist = SubDao.filter(teacher.getSchool());
 		req.setAttribute("ent_year", entYearStr);
 		req.setAttribute("class_num", classNum);
-		req.setAttribute("sub_cd", subject.getName());
+		req.setAttribute("sub_cd",subStr);
 		req.setAttribute("student_no", stunumStr);
 		//クラスデータをリクエスト属性にセット
 		req.setAttribute("class_num_set", classlist);
