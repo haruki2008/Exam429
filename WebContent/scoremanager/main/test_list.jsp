@@ -21,6 +21,7 @@
 		</select>
 		<label>クラス</label>
 		<select name="class_num">
+			<option value="0">--------</option>
 			<c:forEach var="num" items="${class_num_set}">
 				<%-- 現在のnumと選択されていたclass_numが一致していた場合selectedを追記 --%>
 				<option value="${num}" <c:if test="${num==class_num}">selected</c:if>>${num}</option>
@@ -36,14 +37,14 @@
 			</c:forEach>
 		</select>
 
-		<div>${errors.get("ent_year")}</div>
+		<div>${error.get("e-cd")}</div>
 
 		<input type="submit" value="検索">
 	</form>
 
 	<form method = "get">
 		<label>学生番号</label>
-		<input type="text" name="student_no" placeholder="学生番号を入力してください">
+		<input type="text" name="student_no" placeholder="学生番号を入力してください" value = "${student_no}">
 		<input type="submit" value="検索">
 	</form>
 	<c:choose>
@@ -78,7 +79,7 @@
 			</table>
 		</c:when>
 		<c:otherwise>
-			<c:if test="${scores == null}">検索してください</c:if>
+			<c:if test="${scores == null && stuscores == null}">検索してください</c:if>
 			<c:if test="${scores.size() == 0}"><div>成績情報が存在しませんでした</div></c:if>
 			<c:if test="${stuscores != null}">
 				<table class="table table-hover">
@@ -102,7 +103,7 @@
 		</c:otherwise>
 	</c:choose>
 
-	<a href="#">戻る</a>
+	<a href="Menu.action">戻る</a>
 
 </body>
 </html>

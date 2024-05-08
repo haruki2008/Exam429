@@ -54,12 +54,17 @@ public class TestListAction extends Action{
 		entYearStr = req.getParameter("ent_year");//入力された入学年度
 		classNum = req.getParameter("class_num");
 		stunumStr = req.getParameter("student_no");//入力された学生番号
-
+		//科目、クラスで検索する場合
 		if (stunumStr == null) {
+			//検索の条件に入力漏れがあった場合
+			if (entYearStr == null || classNum == null || subStr == null || entYearStr.equals("0") || classNum.equals("0") || subStr.equals("0")) {
+				errors.put("e-cd", "入学年度とクラスと科目を選択してください");
+				req.setAttribute("error", errors);
+			}
 			if (entYearStr != null){
 				entYear = Integer.parseInt(entYearStr);//入学年度
 				}
-			if (entYear != 0 && classNum != "" ) {
+			if (entYear != 0 && classNum != "" && subStr != "" && subStr != null && !subStr.equals("0") && classNum != null && !classNum.equals("0")) {
 				//SubjectDaoのfilterメソッドを使ってJSPから引っ張ってきたデータをもとにSubject型の変数を取得
 				subject = subDao.get(subStr, subject.getSchool());
 				//ログイン中の先生の所属校コードからSchool型のインスタンスを取得
@@ -73,6 +78,7 @@ public class TestListAction extends Action{
 				//選択された科目を表示するためリクエストに科目リストをセット
 				req.setAttribute("sub", subject);
 				}
+			//学生番号で検索する場合
 			} else {
 				StudentDao stuDao = new StudentDao();
 				//jspファイルからの学生番号をもとに学生インスタンスを取得
@@ -82,6 +88,7 @@ public class TestListAction extends Action{
 
 				//リクエストに成績リストをセット
 				req.setAttribute("stuscores", stulist);
+				req.setAttribute("stu", student);
 
 			}
 
@@ -93,11 +100,12 @@ public class TestListAction extends Action{
 			entYearSet.add(i);
 		}
 
+
 		//ユーザが所属している学校の科目データ一覧を取得
 		sublist = SubDao.filter(teacher.getSchool());
 		req.setAttribute("ent_year", entYearStr);
 		req.setAttribute("class_num", classNum);
-		req.setAttribute("subcd", subStr);
+		req.setAttribute("sub_cd",subStr);
 		req.setAttribute("student_no", stunumStr);
 		//クラスデータをリクエスト属性にセット
 		req.setAttribute("class_num_set", classlist);

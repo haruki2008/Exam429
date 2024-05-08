@@ -11,6 +11,7 @@
 //ログインページにリダイレクト
 location.href="/exam429/scoremanager/Login.action";
 </script>
+
 </head>
 <body>
 
