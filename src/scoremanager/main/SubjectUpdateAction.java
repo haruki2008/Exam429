@@ -25,12 +25,11 @@ public class SubjectUpdateAction extends Action {
 		Map<String, String> errors = new HashMap<>();//エラーメッセージ
 
 		//リクエストパラメータ―の取得 2
-		String cd = req.getParameter("cd");//学番
+		String cd = req.getParameter("cd");//科目ID
 
 		//DBからデータ取得 3
-		Subject subject = sDao.get(cd);//科目IDから科目インスタンスを取得
+		Subject subject = sDao.get3(cd,teacher.getSchool());//科目IDから科目インスタンスを取得
 		List<String> list = sDao.filter2(teacher.getSchool());//ログインユーザーの学校コードをもとに科目IDの一覧を取得
-
 
 		//ビジネスロジック 4
 		//DBへデータ保存 5

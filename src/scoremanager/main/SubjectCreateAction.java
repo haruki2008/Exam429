@@ -16,7 +16,7 @@ public class SubjectCreateAction extends Action {
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		//ローカル変数の宣言 1
 		HttpSession session = req.getSession(true);// セッションを取得
-		SubjectDao sDao = new SubjectDao();// クラス番号Daoを初期化
+		SubjectDao sDao = new SubjectDao();// 科目Daoを初期化
 		Teacher teacher = (Teacher) session.getAttribute("user");// ログインユーザーを取得
 
 
