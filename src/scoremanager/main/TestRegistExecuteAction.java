@@ -25,8 +25,9 @@ public class TestRegistExecuteAction extends Action{
 		Teacher teacher = (Teacher)session.getAttribute("user");// ログインユーザーを取得
 		SubjectDao subjectDao = new SubjectDao();//科目Daoを初期化
 		List<Test> lists = new ArrayList<>();
+		List<Integer> list_point = new ArrayList<>();//pointようのリスト
 		Map<String, String> errors = new HashMap<>();//エラーメッセージ
-		
+
 		//リクエストパラメータ―の取得 2
 		String entYearStr = req.getParameter("f1");//入学年度
 		String classNum = req.getParameter("f2");//クラス番号
@@ -37,6 +38,7 @@ public class TestRegistExecuteAction extends Action{
 		for (Test test : list) {
 		String point =	req.getParameter("point_" + test.getStudent().getNo());
 		test.setPoint(Integer.parseInt(point));
+		list_point.add(Integer.parseInt(point));
 		lists.add(test);
 		}
 
@@ -44,13 +46,17 @@ public class TestRegistExecuteAction extends Action{
 		//DBからデータ取得 3
 
 		//ビジネスロジック 4
-		
-		
-		
+
+
+
 		//DBへデータ保存 5
-		if (lists.getPoint() > 0 && lists.getPoint() <= 100){
-			errors.put("f1", "0～100の範囲で入力してください");
-			req.setAttribute("errors", errors);
+		for(int i = 0 ; i > lists.size();i++){
+
+			if (list_point.get(i) > 0 && list_point.get(i) <= 100){
+				errors.put("test_error", "0～100の範囲で入力してください");
+				req.setAttribute("test_error", errors);
+			}
+
 		}
 		tDao.save(lists);
 

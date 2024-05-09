@@ -12,7 +12,7 @@
 
 <h2>成績管理</h2>
 
-		<form method="get">
+		<form method="get" action="TestRegistExecute.action">
 		<label>入学年度</label>
 		<select name="f1">
 			<option value="0">--------</option>
@@ -56,7 +56,7 @@
 
 	<c:choose>
 		<c:when test="${tests.size()>0}">
-			<h2>科目：${subject.getName()}（${num}回）</h2>
+			<h2>科目：${f3}（${f4}回）</h2>
 				<table class="table table-hover">
 				<tr>
 				<th>入学年度</th>
@@ -73,16 +73,13 @@
 				<td>${test.student.no}</td>
 				<td>${test.student.name}</td>
 				<td>
-
-
 				<input type="text" name="point_${test.student.no}" value=" ${test.point}"/>
 				<div>${errors.get("test_error")}</div>
-
 				</td>
 			</tr>
 			</c:forEach>
 			</table>
-			<input type="submit" onclick="TestRegistExecute.action" value="登録して終了"></form>
+			<input type="submit"  value="登録して終了"></form>
 		</c:when>
 	</c:choose>
 
