@@ -1,7 +1,6 @@
 package scoremanager.main;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,13 +12,11 @@ import bean.Teacher;
 import dao.SubjectDao;
 import tool.Action;
 
-public class SubjectUpdateExecuteAction extends Action {
+public class SubjectDeleteExecuteAction extends Action {
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		//ローカル変数の宣言 1
-		SubjectDao sDao = new SubjectDao();// 科目Dao
-
-		Subject Name = null;
+		SubjectDao sDao = new SubjectDao();// 学生Dao
 
 		HttpSession session = req.getSession();//セッション
 		Teacher teacher = (Teacher)session.getAttribute("user");// ログインユーザーを取得
@@ -31,11 +28,9 @@ public class SubjectUpdateExecuteAction extends Action {
 		String cd = req.getParameter("cd");
 		String name = req.getParameter("name");
 
-		Name = sDao.get2(name);
-
 		//DBからデータ取得 3
+
 		Subject subject = sDao.get3(cd,teacher.getSchool());// 科目IDから科目インスタンスを取得
-		List<String> list = sDao.filter2(teacher.getSchool());//ログインユーザーの学校コードをもとにクラス番号の一覧を取得
 
 		//ビジネスロジック 4
 		//DBへデータ保存 5
@@ -44,14 +39,10 @@ public class SubjectUpdateExecuteAction extends Action {
 			// 科目が存在していた場合
 			// インスタンスに値をセット
 
-			if(Name != null){
-				errors.put("name", "入力した科目名は登録済みです");
-			}else{
 				subject.setName(name);
 				subject.setSubjectCd(cd);
-				// 科目を保存
-				sDao.save(subject, req, res);
-			}
+				// 科目を削除
+				sDao.delete(subject, req, res);
 
 		} else {
 			errors.put("cd", "科目が存在していません");
@@ -60,17 +51,16 @@ public class SubjectUpdateExecuteAction extends Action {
 		//エラーがあったかどうかで手順6~7の内容が分岐
 		//レスポンス値をセット 6
 		//JSPへフォワード 7
-		req.setAttribute("class_num_set", list);
 
 		if(!errors.isEmpty()){//エラーがあった場合、更新画面へ戻る
 			// リクエスト属性をセット
 			req.setAttribute("errors", errors);
 			req.setAttribute("name", name);
 			req.setAttribute("cd", cd);
-			req.getRequestDispatcher("subject_update.jsp").forward(req, res);
+			req.getRequestDispatcher("subject_delete.jsp").forward(req, res);
 			return;
 		}
 
-		req.getRequestDispatcher("subject_update_done.jsp").forward(req, res);
+		req.getRequestDispatcher("subject_delete_done.jsp").forward(req, res);
 	}
 }
