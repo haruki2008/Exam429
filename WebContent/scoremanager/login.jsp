@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -20,7 +21,7 @@
 
 	required:input要素を入力必須にする属性
  -->
-
+	<p>${errors.get("1")}</p>
 	<!-- ＩＤ -->
 	<label>ＩＤ</label>
 	<input type="text" name="id" maxlength="20" placeholder="20文字以内の半角英数字でご入力下さい"
@@ -28,15 +29,25 @@
 
 	<!-- パスワード -->
 	<label>パスワード</label>
-	<input type="password" name="password" value="password">
+	<input type="password" id=password  name="password" value="password">
 
-	<!-- 名前 -->
-	<label>名前</label>
-	<input type="text" name="namae" value="大原花子">
+	<!-- パスワード表示チェックボックス -->
+	<input type="checkbox" id="showPassword" onchange="togglePasswordVisibility()" />
+	<label for="showPassword">パスワードを表示する</label>
+	<script>
+			function togglePasswordVisibility() {
+				let passwordInput = document.getElementById("password");
+				let showPasswordCheckbox = document.getElementById("showPassword");
 
-	<!-- 学校コード -->
-	<label>学校コード</label>
-	<input type="text" name="school_cd" value="knz">
+				if (showPasswordCheckbox.checked) {
+					passwordInput.type = "text";
+				} else {
+					passwordInput.type = "password";
+				}
+			}
+
+
+ 	 </script>
 
 	<!-- ログイン用ボタン -->
 	<input type="submit" name="login" value="ログイン"/>

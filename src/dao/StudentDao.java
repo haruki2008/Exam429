@@ -94,7 +94,7 @@ public class StudentDao  extends Dao{
 	 * @throws Exception
 	 */
 	private List<Student> postFilter(ResultSet rSet, School school) throws Exception {
-//		//まずはここに処理追加
+		//まずはここに処理追加
 		//戻り値用のリスト
 		List<Student> list = new ArrayList<>();
 		try{

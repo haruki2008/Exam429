@@ -1,11 +1,14 @@
 package scoremanager;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.School;
 import bean.Teacher;
+import dao.TeacherDao;
 import tool.Action;
 
 public class LoginExecuteAction extends Action{
@@ -16,34 +19,37 @@ public class LoginExecuteAction extends Action{
 		String url = "";
 
 		Teacher teacher = new Teacher();
-		School school = new School();
+		TeacherDao tDao = new TeacherDao();
 
 		//リクエストパラメータ―の取得 2
 		String id = req.getParameter("id");
 		String password = req.getParameter("password");
-		String name = req.getParameter("namae");
-		String school_cd = req.getParameter("school_cd");
 
 		//DBからデータ取得 3
-		//なし
+		teacher = tDao.login(id,password);
+
 		//ビジネスロジック 4
 
-		teacher.setId(id);
-		teacher.setPassword(password);
-		teacher.setName(name);
 
-		school.setCd(school_cd);
-		school.setName("大宮校");
 
-		teacher.setSchool(school);//School型
+		if (teacher != null) {
+			// 認証済みフラグを立てる
+			teacher.setAuthenticated(true);
+			//Sessionを有効にする
+			HttpSession session = req.getSession(true);
+			//セッションに"user"という変数名で値はTeacher変数の中身
+			session.setAttribute("user", teacher);
+			//リダイレクト
+			url = "main/Menu.action";
+			res.sendRedirect(url);
+		} else {
+			Map<String, String> errors = new HashMap<>();// エラーメッセージ
+			errors.put("1", "ログインに失敗しました。IDまたはPasswardが違います。");
+			req.setAttribute("errors", errors);
+			url = "login.jsp";
+			req.getRequestDispatcher(url).forward(req, res);
+		}
 
-		// 認証済みフラグを立てる
-		teacher.setAuthenticated(true);
-
-		//Sessionを有効にする
-		HttpSession session = req.getSession(true);
-		//セッションに"user"という変数名で値はTeacher変数の中身
-		session.setAttribute("user", teacher);
 
 		//DBへデータ保存 5
 		//なし
@@ -52,9 +58,7 @@ public class LoginExecuteAction extends Action{
 		//JSPへフォワード 7
 		//req.getRequestDispatcher("main/Menu.action").forward(req, res);
 
-		//リダイレクト
-		url = "main/Menu.action";
-		res.sendRedirect(url);
+
 	}
 
 }
