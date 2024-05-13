@@ -74,7 +74,10 @@
 				<td>${test.student.no}</td>
 				<td>${test.student.name}</td>
 				<td>
-				<input type="text" name="point_${test.student.no}" value="${test.point}"/>
+				<c:choose>
+				<c:when test="${test.point=='0'}"><input type="text" name="point_${test.student.no}" value=""/></c:when>
+				<c:otherwise><input type="text" name="point_${test.student.no}" value="${test.point}"/></c:otherwise>
+				</c:choose>
 				<div>${errors.get("test_error")}</div>
 				</td>
 			</tr>

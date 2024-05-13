@@ -25,7 +25,6 @@ public class TestRegistExecuteAction extends Action{
 		Teacher teacher = (Teacher)session.getAttribute("user");// ログインユーザーを取得
 		SubjectDao subjectDao = new SubjectDao();//科目Daoを初期化
 		List<Test> lists = new ArrayList<>();
-		List<Integer> list_point = new ArrayList<>();//pointようのリスト
 		Map<String, String> errors = new HashMap<>();//エラーメッセージ
 
 		//リクエストパラメータ―の取得 2
@@ -37,11 +36,19 @@ public class TestRegistExecuteAction extends Action{
 		List<Test> list = tDao.filter(Integer.parseInt(entYearStr), classNum, subjectDao.get(subjectCd, teacher.getSchool()),Integer.parseInt(Num), teacher.getSchool());
 
 		for (Test test : list) {
-		String point =	req.getParameter("point_" + test.getStudent().getNo());
-		test.setPoint(Integer.parseInt(point));
-		test.setSubject(subjectDao.get(subjectCd, teacher.getSchool()));
-		list_point.add(Integer.parseInt(point));
-		lists.add(test);
+			String point =	req.getParameter("point_" + test.getStudent().getNo());
+			if (point != ""){
+				test.setPoint(Integer.parseInt(point));
+				test.setSubject(subjectDao.get(subjectCd, teacher.getSchool()));
+				test.setNo(Integer.parseInt(Num));
+
+				if (Integer.parseInt(point) < 0 && Integer.parseInt(point) > 100){
+					errors.put("test_error", "0～100の範囲で入力してください");
+					req.setAttribute("test_error", errors);
+					req.getRequestDispatcher("test_regist.jsp").forward(req, res);
+				}
+				lists.add(test);
+			}
 		}
 
 
@@ -52,14 +59,7 @@ public class TestRegistExecuteAction extends Action{
 
 
 		//DBへデータ保存 5
-		for(int i = 0 ; i > lists.size();i++){
 
-			if (list_point.get(i) > 0 && list_point.get(i) <= 100){
-				errors.put("test_error", "0～100の範囲で入力してください");
-				req.setAttribute("test_error", errors);
-			}
-
-		}
 		tDao.save(lists);
 
 		req.getRequestDispatcher("test_regist_done.jsp").forward(req, res);
