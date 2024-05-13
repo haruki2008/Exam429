@@ -13,6 +13,7 @@ public class Subject extends Teacher implements Serializable{
 	private String name;
 
 
+	//学校
 	private School school;
 
 

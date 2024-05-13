@@ -19,7 +19,7 @@ public class SubjectUpdateExecuteAction extends Action {
 		//ローカル変数の宣言 1
 		SubjectDao sDao = new SubjectDao();// 科目Dao
 
-		Subject Name = null;
+		Subject Name = null; //科目名
 
 		HttpSession session = req.getSession();//セッション
 		Teacher teacher = (Teacher)session.getAttribute("user");// ログインユーザーを取得
@@ -35,7 +35,7 @@ public class SubjectUpdateExecuteAction extends Action {
 
 		//DBからデータ取得 3
 		Subject subject = sDao.get3(cd,teacher.getSchool());// 科目IDから科目インスタンスを取得
-		List<String> list = sDao.filter2(teacher.getSchool());//ログインユーザーの学校コードをもとにクラス番号の一覧を取得
+		List<String> list = sDao.filter2(teacher.getSchool());//ログインユーザーの学校コードをもとに科目IDの一覧を取得
 
 		//ビジネスロジック 4
 		//DBへデータ保存 5
@@ -44,7 +44,7 @@ public class SubjectUpdateExecuteAction extends Action {
 			// 科目が存在していた場合
 			// インスタンスに値をセット
 
-			if(Name != null){
+			if(Name != null){ //DBに保存済みの科目名が存在する
 				errors.put("name", "入力した科目名は登録済みです");
 			}else{
 				subject.setName(name);

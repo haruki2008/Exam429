@@ -38,7 +38,7 @@ public class SubjectCreateExecuteAction extends Action {
 
 		//DBからデータ取得 3
 		subject = sDao.get3(cd,teacher.getSchool());// 科目IDから科目インスタンスを取得
-		Name = sDao.get2(name);
+		Name = sDao.get2(name); //科目名を取得
 
 		// ログインユーザーの学校コードをもとに科目IDの一覧を取得
 		List<String> list = sDao.filter2(teacher.getSchool());
@@ -62,6 +62,7 @@ public class SubjectCreateExecuteAction extends Action {
 				sDao.save(subject, req, res);
 
 			} else {
+				//入力した科目名がDBに保存されている
 				errors.put("name", "科目名が重複しています");
 
 			}

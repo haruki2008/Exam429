@@ -294,19 +294,8 @@ public class SubjectDao extends Dao {
 	/**
 	 *
 	 * @param school  //学校
-	 * @param cd  //科目ID
 	 * @return
-	 *      科目のリスト List<Subject> ない場合は空(0件)のリスト
-	 * @throws Exception
-	 */
-
-
-
-	/**
-	 *
-	 * @param school  //学校
-	 * @return
-	 *      科目のリスト List<Subject> ない場合は空(0件)のリスト
+	 *      科目cdのリスト List<Subject> ない場合は空(0件)のリスト
 	 * @throws Exception
 	 */
 	public List<Subject> filter(School school) throws Exception {
@@ -355,6 +344,14 @@ public class SubjectDao extends Dao {
 		return list;
 	}
 
+
+	/**
+	 *
+	 * @param school  //学校
+	 * @return
+	 * 			//科目のリスト List<Subject> ない場合は空(0件)のリスト
+	 * @throws Exception
+	 */
 	public List<String> filter3(School school) throws Exception {
 		// 戻り値用のリストを作成
 		// new演算子とArrayListで空のListを用意
@@ -370,7 +367,8 @@ public class SubjectDao extends Dao {
 		try {
 
 			// プリペアードステートメントにSQL文をセット
-			statement = connection.prepareStatement("select name from subject where school_cd = ? ");
+			statement = connection.prepareStatement(
+					"select name from subject where school_cd = ? ");
 
 			//プレースホルダー（？の部分）に値を設定
 			statement.setString(1,school.getCd());
@@ -382,7 +380,7 @@ public class SubjectDao extends Dao {
 
 			// リザルトセット（結果）を全件走査
 			while (rSet.next()){
-				// 戻り値用のlistに科目IDを追加
+				// 戻り値用のlistに科目名を追加
 				list.add(rSet.getString("name"));
 			}
 		} catch (Exception e) {
@@ -408,6 +406,13 @@ public class SubjectDao extends Dao {
 		return list;
 	}
 
+
+	/**
+	 *
+	 * @param school
+	 * @return
+	 * @throws Exception
+	 */
 	public List<String> filter2(School school) throws Exception {
 		// 戻り値用のリストを作成
 		// new演算子とArrayListで空のListを用意
@@ -459,66 +464,8 @@ public class SubjectDao extends Dao {
 				}
 			}
 		}
-
-		return list;
-
-	}
-
-
-
-	public List<String> filter4(School school) throws Exception {
-		// 戻り値用のリストを作成
-		// new演算子とArrayListで空のListを用意
-		List<String> list = new ArrayList<>();
-
-		// データベースへのコネクションを確立
-		// データベースに接続された！！
-		Connection connection = getConnection();
-
-		// プリペアードステートメント
-		PreparedStatement statement = null;
-
-		try {
-
-			// プリペアードステートメントにSQL文をセット
-			statement = connection.prepareStatement("select name from subject where school_cd = ? ");
-
-			//プレースホルダー（？の部分）に値を設定
-			statement.setString(1,school.getCd());
-
-			// プリペアードステートメントを実行
-			// SQL文を実行する
-			// 結果はリザルトセット型となる
-			ResultSet rSet = statement.executeQuery();
-
-			// リザルトセット（結果）を全件走査
-			while (rSet.next()){
-				// 戻り値用のlistに科目IDを追加
-				list.add(rSet.getString("name"));
-			}
-		} catch (Exception e) {
-			throw e;
-		} finally {
-			// プリペアードステートメントを閉じる
-			if (statement != null) {
-				try {
-					statement.close();
-				} catch (SQLException sqle) {
-					throw sqle;
-				}
-			}
-			// コネクションを閉じる
-			if (connection != null) {
-				try {
-					connection.close();
-				} catch (SQLException sqle) {
-					throw sqle;
-				}
-			}
-		}
 		return list;
 	}
-
 
 
 	public boolean save(Subject subject,HttpServletRequest req, HttpServletResponse res) throws Exception {

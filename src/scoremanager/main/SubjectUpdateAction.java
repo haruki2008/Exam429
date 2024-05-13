@@ -25,7 +25,7 @@ public class SubjectUpdateAction extends Action {
 		Map<String, String> errors = new HashMap<>();//エラーメッセージ
 
 		//リクエストパラメータ―の取得 2
-		String cd = req.getParameter("cd");//学番
+		String cd = req.getParameter("cd");//科目ID
 
 		//DBからデータ取得 3
 		Subject subject = sDao.get3(cd,teacher.getSchool());//科目IDから科目インスタンスを取得

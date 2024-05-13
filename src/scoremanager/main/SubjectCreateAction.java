@@ -19,8 +19,6 @@ public class SubjectCreateAction extends Action {
 		SubjectDao sDao = new SubjectDao();// クラス番号Daoを初期化
 		Teacher teacher = (Teacher) session.getAttribute("user");// ログインユーザーを取得
 
-
-
 		//リクエストパラメータ―の取得 2
 		//なし
 

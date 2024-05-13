@@ -24,8 +24,7 @@ public class SubjectListAction extends Action {
 
 		String Cd = "";
 
-		String entName = "";
-		String Name = "";
+
 
 
 		List<Subject> subjects = null;// 科目リスト
@@ -35,12 +34,6 @@ public class SubjectListAction extends Action {
 		//リクエストパラメータ―の取得 2
 		entCd = req.getParameter("f1");
 
-		entName = req.getParameter("f2");
-
-
-		if(entName != null){
-			Name = entName;
-		}
 
 		//DBからデータ取得３
 
