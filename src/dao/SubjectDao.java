@@ -524,8 +524,11 @@ public class SubjectDao extends Dao {
 	public boolean save(Subject subject,HttpServletRequest req, HttpServletResponse res) throws Exception {
 		// TODO 自動生成されたメソッド・スタブ
 
+
 		HttpSession session = req.getSession();//セッション
 		Teacher teacher = (Teacher) session.getAttribute("user");// ログインユーザーを取得
+
+        Subject data = get3(subject.getSubjectCd(),teacher.getSchool());
 
 		//コネクションを確立
 	    Connection connection = getConnection();
@@ -536,16 +539,16 @@ public class SubjectDao extends Dao {
 
 	    try{
 
-	        //データベースから科目データを取得
-	        Subject data = get3(subject.getSubjectCd(),teacher.getSchool());
 	        if (data == null) {
 
+
+	        	System.out.println(teacher.getSchool().getCd());
 	            //科目IDが存在しなかった場合
 	            //プリペアードステートメンにINSERT文をセット
 	            statement = connection. prepareStatement (
 	            "insert into subject (school_cd, cd, name) values(?, ?, ?)");
 	            //プリペアードステートメントに値をバインド
-	            statement. setString(1, subject. getSchool (). getCd ());
+	            statement. setString(1, teacher.getSchool().getCd());
 	            statement. setString (2, subject. getSubjectCd ());
 	            statement. setString (3, subject. getName ());
 
@@ -558,9 +561,9 @@ public class SubjectDao extends Dao {
 	            		.prepareStatement (
 	                "update subject set name =? where school_cd = ? and cd = ? ");
 	            //プリペアードステートメントに値をバインド
-	            statement. setString(1, subject. getName ());
-	            statement. setString(2, subject. getSchool (). getCd ());
-	            statement. setString (3, subject. getSubjectCd ());
+	            statement. setString(1, subject. getName());
+	            statement. setString(2, teacher.getSchool().getCd());
+	            statement. setString (3, subject. getSubjectCd());
 
 	        }
 	        //プリペアードステートメントを実行
@@ -622,7 +625,7 @@ public class SubjectDao extends Dao {
 
             //プリペアードステートメントに値をバインド
             statement. setString(1, subject. getName ());
-            statement. setString(2, subject. getSchool (). getCd ());
+            statement. setString(2, teacher.getSchool (). getCd ());
             statement. setString (3, subject. getSubjectCd ());
 
 	        }

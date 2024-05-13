@@ -47,7 +47,6 @@ public class SubjectCreateExecuteAction extends Action {
 		//DBへデータ保存 5
 		//条件で手順4~5の内容が分岐
 
-
 		if (subject == null) {// 新規の科目ID
 
 			if(Name == null){ //新規の科目名
@@ -55,7 +54,7 @@ public class SubjectCreateExecuteAction extends Action {
 				// 科目インスタンスを初期化
 				subject = new Subject();
 				// インスタンスに値をセット
-				subject.setSchool(((Teacher)session.getAttribute("user")).getSchool());
+				subject.setSchool(teacher.getSchool());
 				subject.setSubjectCd(cd);
 				subject.setName(name);
 

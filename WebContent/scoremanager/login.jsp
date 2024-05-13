@@ -28,7 +28,7 @@
 
 	<!-- パスワード -->
 	<label>パスワード</label>
-	<input type ="text" name ="password" value ="password">
+	<input type ="password" name ="password" value ="password">
 
 	<!-- 名前 -->
 	<label>名前</label>
@@ -38,6 +38,7 @@
 	<label>学校コード</label>
 	<input type ="text" name ="school_cd" value ="knz">
 
+	<!-- ログイン用ボタン -->
 	<input type ="submit" name ="login" value ="ログイン">
 </form>
 
