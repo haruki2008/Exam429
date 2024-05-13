@@ -78,6 +78,7 @@ public class TestDao extends Dao{
 
 	}
 
+
 	//ResultSet型をtest型に変換するメソッド
 	private List<Test> postFilter(ResultSet rSet, School school) throws Exception{
 		//戻り値用のリスト
@@ -113,7 +114,9 @@ public class TestDao extends Dao{
 	    //リザルトセット
 	    ResultSet rSet = null;
 	    //SQL文の条件
-	    String condition = " where ent_year =? and student.class_num =? and (subject_cd =? or subject_cd is null) and (test.no =? or test.no is null) and student.School_cd =?";
+	    String condition = " where ent_year =? and student.class_num =? and "
+	    		+ "(subject_cd =? or subject_cd is null) and "
+	    		+ "(test.no =? or test.no is null) and student.School_cd =?";
 	    //SQL文のソートー
 	    String order = " order by no asc";
 
@@ -162,30 +165,33 @@ public class TestDao extends Dao{
 
 	public boolean save(List<Test> list) throws Exception{
 
-		//データベースへのコネクションを確立
-		Connection connection = getConnection();
+
 
 		int count = 0;
-		//値がカウントされたら失敗する
-		try{
+
 			for (Test test:list){
+				//データベースへのコネクションを確立
+				Connection connection = getConnection();
+				//値がカウントされたら失敗する
+				try{
 				boolean bool = save(test, connection);
 				if(bool != true){
 					count++;
+					}
 				}
-			}
-		} catch (Exception e) {
-			throw e;
-		} finally {
+				catch (Exception e) {
+					throw e;
+				} finally {
 
-			if(connection != null) {
-				try {
-					connection.close();
-				} catch (SQLException sqle) {
-					throw sqle;
+					if(connection != null) {
+						try {
+							connection.close();
+						} catch (SQLException sqle) {
+							throw sqle;
+						}
+					}
 				}
 			}
-		}
 		if (count > 0){
 			return true;
 		}
@@ -221,7 +227,7 @@ public class TestDao extends Dao{
 					//学生が存在した場合
 					//プリペアードステートメントにUPDATE文をセット
 					statement = connection
-							.prepareStatement("update test point=? where student_no=? and subject_cd=? and school_cd=? and and no=?");
+							.prepareStatement("update test set point=? where student_no=? and subject_cd=? and school_cd=? and no=?");
 					//プリペアードステートメントに値をバインド
 					statement.setInt(1, test.getPoint());
 					statement.setString(2, test.getStudent().getNo());
