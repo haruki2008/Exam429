@@ -9,7 +9,8 @@
 <title>得点管理システム</title>
 </head>
 <body>
-<%@ include file="../common/header.jsp" %>
+
+<h1>得点管理システム</h1>
 <div class = "login">
 	<div class = "strlogin">
 		<p>ログイン</p>
@@ -63,8 +64,7 @@
 
 	</form>
 </div>
-<div class = "footer">
-	<%@ include file="../common/footer.jsp" %>
-</div>
+
+
 </body>
 </html>

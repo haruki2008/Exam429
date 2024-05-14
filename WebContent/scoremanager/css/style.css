@@ -1,0 +1,81 @@
+h1 {
+	font-size: 25px;
+	background-color: #cce5ff;
+	margin: 0px 120px;
+	padding: 20px;
+}
+.login {
+	text-align: center;
+}
+.strlogin {
+	font-size: 20px;
+	margin: 10px 350px 0px 350px;
+	background-color: #dcdcdc;
+	border-right: 0.5px solid #dcdcdc;
+	border-left: 0.5px solid #dcdcdc;
+}
+.strlogin p {
+	margin-bottom: 0px;
+}
+.erorrcd p{
+	font-size: 14px;
+	margin: 0px 350px 0px 350px;
+	border-right: 0.5px solid #dcdcdc;
+	border-left: 0.5px solid #dcdcdc;
+}
+.id input{
+	-webkit-appearance: none;
+	outline: none;
+	border-radius: 3px;
+	border: 1px solid gray;
+	width:70%;
+	padding: 10px;
+	background: #cce5ff;
+	border: 0.5px solid #dcdcdc;
+}
+.id {
+	margin: 0px 350px;
+	border-right: 0.5px solid #dcdcdc;
+	border-left: 0.5px solid #dcdcdc;
+}
+.pass {
+	margin: 0px 350px;
+	border-right: 0.5px solid #dcdcdc;
+	border-left: 0.5px solid #dcdcdc;
+}
+.pass input {
+	-webkit-appearance: none;
+	outline: none;
+	border-radius: 3px;
+	border: 1px solid gray;
+	width:70%;
+	padding: 10px;
+	background: #cce5ff;
+	border: 0.5px solid #dcdcdc;
+}
+.passchk {
+	font-size: 15px;
+	margin: 0px 350px;
+	border-right: 0.5px solid #dcdcdc;
+	border-left: 0.5px solid #dcdcdc;
+}
+.botan input {
+	width:30%;
+	padding: 8px;
+	-webkit-appearance: none;
+	outline: none;
+	border-radius: 8px;
+	border: 1px solid #0000ff;
+	background: #4242ff;
+	color: #ffffff;
+}
+.botan {
+	margin: 0px 350px;
+	border-right: 0.5px solid #dcdcdc;
+	border-left: 0.5px solid #dcdcdc;
+	border-bottom: 0.5px solid #dcdcdc;
+	padding-bottom: 20px;
+}
+.footer {
+	text-align: center;
+}
