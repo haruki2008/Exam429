@@ -10,6 +10,7 @@
 </head>
 <body>
 
+
 <h2>メニュー</h2>
 
 <a href="StudentList.action">学生管理</a>
