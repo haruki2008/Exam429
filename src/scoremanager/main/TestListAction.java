@@ -85,6 +85,10 @@ public class TestListAction extends Action{
 				student = stuDao.get(stunumStr);
 				TestListStudentDao TLStuDao = new TestListStudentDao();
 				List<TestListStudent> stulist = TLStuDao.filter(student);
+				if (stulist == null) {
+					errors.put("founderorr", "学生が見つかりませんでした。");
+					req.setAttribute("error", errors);
+				}
 
 				//リクエストに成績リストをセット
 				req.setAttribute("stuscores", stulist);

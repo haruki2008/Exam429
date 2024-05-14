@@ -41,48 +41,54 @@ public class TestListStudentDao extends Dao{
 	public List<TestListStudent> filter(Student student) throws Exception {
 		//リストを初期化
 	    List<TestListStudent> list = new ArrayList<>();
-	    //コネクションを確立
-	    Connection connection = getConnection();
-	    //プリペアードステートメント
-	    PreparedStatement statement = null;
-	    //リザルトセット
-	    ResultSet rSet = null;
-	  //SQL文の条件
-	    String condition = "WHERE SUBJECT.SCHOOL_CD = ? AND TEST.STUDENT_NO = ?";
-	  //SQL文のソート
-	    String order = " order by no asc";
-	    try {
-	    	//プリペアードステートメントにSQL文をセット
-		    statement = connection. prepareStatement (baseSql + condition + order);
-		    //プリペアードステートメントに学校コードをバインド
-		    statement. setString(1,student.getSchool().getCd());
-		    // プリペアードステートメントに学生番号をバインド
-		    statement.setString(2,student.getNo());
-		    //プライベートステートメントを実行
-		    rSet = statement.executeQuery ();
-		    //帰ってきたResultSet型を型に変えて結果をセットする
-		    list = postFilter(rSet);
-		} catch (Exception e) {
-			throw e;
-		} finally {
+	    if (student != null) {
+		    	//コネクションを確立
+			    Connection connection = getConnection();
+			    //プリペアードステートメント
+			    PreparedStatement statement = null;
+			    //リザルトセット
+			    ResultSet rSet = null;
+			  //SQL文の条件
+			    String condition = "WHERE SUBJECT.SCHOOL_CD = ? AND TEST.STUDENT_NO = ?";
+			  //SQL文のソート
+			    String order = " order by no asc";
+			    try {
+			    	//プリペアードステートメントにSQL文をセット
+				    statement = connection. prepareStatement (baseSql + condition + order);
+				    //プリペアードステートメントに学校コードをバインド
+				    statement. setString(1,student.getSchool().getCd());
+				    // プリペアードステートメントに学生番号をバインド
+				    statement.setString(2,student.getNo());
+				    //プライベートステートメントを実行
+				    rSet = statement.executeQuery ();
+				    //帰ってきたResultSet型を型に変えて結果をセットする
+				    list = postFilter(rSet);
+				} catch (Exception e) {
+					throw e;
+				} finally {
 
-			if(statement != null) {
-				try {
-					statement.close();
-				} catch (SQLException sqle) {
-					throw sqle;
-				}
-			}
+					if(statement != null) {
+						try {
+							statement.close();
+						} catch (SQLException sqle) {
+							throw sqle;
+						}
+					}
 
-			if(connection != null) {
-				try {
-					connection.close();
-				} catch (SQLException sqle) {
-					throw sqle;
+					if(connection != null) {
+						try {
+							connection.close();
+						} catch (SQLException sqle) {
+							throw sqle;
+						}
+					}
 				}
-			}
-		}
-		//listを返す
-		return list;
+				//listを返す
+				return list;
+	    	} else {
+	    		list = null;
+	    		return list;
+	    	}
+
 	}
 }
