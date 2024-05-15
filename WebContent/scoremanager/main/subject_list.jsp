@@ -8,12 +8,22 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>得点管理システム</title>
 </head>
+
+<link rel="stylesheet" href="./css/style.css">
 <body>
 
-<c:import url = "../common/navigation.jsp" />
 
-	<h2>科目管理</h2>
-	<a href="SubjectCreate.action">新規登録</a>
+
+<div class="sidebar">
+<c:import url = "./common/navigation.jsp" />
+</div>
+
+<div class="sub_r">
+
+	<h2 class="subject">科目管理</h2>
+
+	<div class="sub_chart">
+	<a href="SubjectCreate.action" class="new_sub">新規登録</a>
 
 	<form method="get">
 		<label>科目ID </label>
@@ -62,6 +72,9 @@
 		</c:otherwise>
 	</c:choose>
 	<a href="menu.jsp">戻る</a>
+	</div>
+
+</div>
 
 </body>
 </html>
