@@ -63,8 +63,6 @@
 
 	</form>
 </div>
-<div class = "footer">
-	<%@ include file="../common/footer.jsp" %>
-</div>
+<%@ include file="../common/footer.jsp" %>
 </body>
 </html>
