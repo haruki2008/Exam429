@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="./css/style.css">
 <body>
 
-
+<h1 class="system">得点管理システム</h1>
 
 <div class="sidebar">
 <c:import url = "./common/navigation.jsp" />
