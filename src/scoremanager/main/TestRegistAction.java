@@ -64,6 +64,7 @@ public class TestRegistAction extends Action{
 
 		subject = sDao.get(subjectStr,sub.getSchool());
 
+
 		if (entYearStr != null) {
 			// 数値に変換
 			entYear = Integer.parseInt(entYearStr);
@@ -131,6 +132,7 @@ public class TestRegistAction extends Action{
 		req.setAttribute("subject_set", subject_list);
 		req.setAttribute("no_set", no_list);
 
+		req.setAttribute("subject", subject);
 
 		//JSPへフォワード 7
 		req.getRequestDispatcher("test_regist.jsp").forward(req, res);
