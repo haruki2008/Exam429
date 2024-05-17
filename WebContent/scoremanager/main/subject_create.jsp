@@ -14,7 +14,7 @@
 
 		<label>科目ID</label>
 		<input type="text" name="cd"
-			placeholder="科目IDを入力してください" maxlength="10"
+			placeholder="科目IDを入力してください" maxlength="3"
 			value="${subject.getCd()}" required />
 		<div>${errors.get("cd")}</div>
 

@@ -49,29 +49,31 @@ public class SubjectCreateExecuteAction extends Action {
 
 		if (subject == null) {// 新規の科目ID
 
-			if(Name == null){ //新規の科目名
+			if(cd.length() != 3){ //科目IDの文字数が3文字ではない
+				errors.put("cd", "3文字で入力してください");
 
-				// 科目インスタンスを初期化
-				subject = new Subject();
-				// インスタンスに値をセット
-				subject.setSchool(teacher.getSchool());
-				subject.setSubjectCd(cd);
-				subject.setName(name);
 
-				// 科目を保存
-				sDao.save(subject, req, res);
+			}else if(Name == null) {
+			//入力した科目名がDBに保存されている
+			errors.put("name", "科目名が重複しています");
 
-			} else {
-				//入力した科目名がDBに保存されている
-				errors.put("name", "科目名が重複しています");
+			}else { //科目IDが3文字で、DBに保存されていない科目
 
+			// 科目インスタンスを初期化
+			subject = new Subject();
+			// インスタンスに値をセット
+			subject.setSchool(teacher.getSchool());
+			subject.setSubjectCd(cd);
+			subject.setName(name);
+
+			// 科目を保存
+			sDao.save(subject, req, res);
 			}
+
 		} else if(subject != null) {//入力された科目IDがDBに保存されていた場合
 
 			errors.put("cd", "科目IDが重複しています");
 		}
-
-
 
 		//エラーがあったかどうかで手順6~7の内容が分岐
 		//レスポンス値をセット 6
