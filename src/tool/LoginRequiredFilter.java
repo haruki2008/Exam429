@@ -25,7 +25,7 @@ public class LoginRequiredFilter implements Filter {
 		// ログインユーザーを取得
 		Teacher user = (Teacher)req.getSession(true).getAttribute("user");
 		// ユーザーが存在しないまたは認証されていない場合
-		if (user == null  || !user.isAuthenticated() ) {
+		if (user == null || !user.isAuthenticated()) {
 			HttpServletResponse	res = ((HttpServletResponse) response);
 			// ログインページへリダイレクト
 			req.getRequestDispatcher("/scoremanager/login.jsp").forward(req, res);
