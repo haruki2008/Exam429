@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 h1 {
 	font-size: 25px;
 	background-color: #cce5ff;
@@ -79,3 +80,164 @@ h1 {
 .footer {
 	text-align: center;
 }
+=======
+.header {
+	font-size: 25px;
+	background-color: #cce5ff;
+	margin: 0px 120px;
+	padding: 0.5px 20px;
+}
+.footer {
+	text-align: center;
+	font-size: 15px;
+	margin: 0px 120px;
+	background-color: #dcdcdc;
+}
+.username {
+	font-size: 15px;
+	float: right;
+	position: relative;
+	bottom: 30px;
+	right: 20px;
+}
+.nav {
+	float: left;
+	margin-left: 100px;
+	margin-bottom: 200px;
+	border-right: 0.5px solid #dcdcdc;
+	padding-right: 100px;
+	padding-bottom: 200px;
+}
+.login {
+	text-align: center;
+}
+.strlogin {
+	font-size: 20px;
+	margin: 10px 350px 0px 350px;
+	background-color: #dcdcdc;
+	border-right: 0.5px solid #dcdcdc;
+	border-left: 0.5px solid #dcdcdc;
+}
+.strlogin p {
+	margin-bottom: 0px;
+}
+.erorrcd p{
+	font-size: 14px;
+	margin: 0px 350px 0px 350px;
+	border-right: 0.5px solid #dcdcdc;
+	border-left: 0.5px solid #dcdcdc;
+}
+.id input{
+	-webkit-appearance: none;
+	outline: none;
+	border-radius: 3px;
+	border: 1px solid gray;
+	width:70%;
+	padding: 10px;
+	background: #cce5ff;
+	border: 0.5px solid #dcdcdc;
+}
+.id {
+	margin: 0px 350px;
+	border-right: 0.5px solid #dcdcdc;
+	border-left: 0.5px solid #dcdcdc;
+}
+.pass {
+	margin: 0px 350px;
+	border-right: 0.5px solid #dcdcdc;
+	border-left: 0.5px solid #dcdcdc;
+}
+.pass input {
+	-webkit-appearance: none;
+	outline: none;
+	border-radius: 3px;
+	border: 1px solid gray;
+	width:70%;
+	padding: 10px;
+	background: #cce5ff;
+	border: 0.5px solid #dcdcdc;
+}
+.passchk {
+	font-size: 15px;
+	margin: 0px 350px;
+	border-right: 0.5px solid #dcdcdc;
+	border-left: 0.5px solid #dcdcdc;
+}
+.botan input {
+	width:30%;
+	padding: 8px;
+	-webkit-appearance: none;
+	outline: none;
+	border-radius: 8px;
+	border: 1px solid #0000ff;
+	background: #4242ff;
+	color: #ffffff;
+}
+.botan {
+	margin: 0px 350px;
+	border-right: 0.5px solid #dcdcdc;
+	border-left: 0.5px solid #dcdcdc;
+	border-bottom: 0.5px solid #dcdcdc;
+	padding-bottom: 20px;
+}
+.logout {
+	margin : 0 auto;
+}
+.logout h1 {
+	background-color: #dcdcdc;
+	font-size: 25px;
+	margin: 15px 150px;
+}
+.logout p {
+	background-color: #3cb371;
+	text-align: center;
+	margin: 15px 150px 20px 150px;
+	font-size: 15px;
+}
+.logout a {
+	margin: 0px 0px 0px 150px;
+}
+.menu {
+	position: relative;
+	margin-bottom: 160px;
+	left: 50px;
+}
+.strmenu {
+	background-color: #dcdcdc;
+	margin-left: 260px;
+	margin-right: 180px;
+}
+.menucon {
+	margin-right: 190px;
+	text-align: justify;
+	text-justify: distribute-all-lines;
+}
+.studentlist {
+	display: inline-block;
+	/*background-color: #dcdcdc;
+	width: 120px;
+	height: 100px;*/
+	text-align: center;
+
+}
+.testregist {
+	display: inline-block;
+	/*background-color: #dcdcdc;
+	width: 120px;
+	height: 100px;
+	position: relative;
+	bottom: 0px;*/
+	text-align: center;
+}
+.subject {
+	display: inline-block;
+	/*background-color: #dcdcdc;
+	width: 120px;
+	height: 100px;*/
+
+	text-align: center;
+}
+
+
+
+>>>>>>> branch 'master' of https://github.com/haruki2008/Exam429.git
