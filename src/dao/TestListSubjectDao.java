@@ -67,7 +67,7 @@ public class TestListSubjectDao extends Dao{
 		    // プリペアードステートメントにクラス番号をバインド
 		    statement. setString (2, classNum) ;
 		    //プリペアードステートメントに科目名をバインド
-		    statement. setString(3, subject.getSubjectCd()) ;
+		    statement. setString(3, subject.getCd()) ;
 		    //プリペアードステートメントに回数をバインド
 		    statement. setString(4, school.getCd());
 		    // プライベートステートメントを実行
