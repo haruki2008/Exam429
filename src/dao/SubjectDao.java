@@ -46,7 +46,7 @@ public class SubjectDao extends Dao {
 			    subject.setSchool(schoolDao.get(rSet.getString("school_cd")));
 
 				// 科目インスタンスに検索結果をセット
-				subject.setSubjectCd(rSet.getString("cd"));
+				subject.setCd(rSet.getString("cd"));
 				subject.setName(rSet.getString("name"));
 
 			} else {
@@ -78,7 +78,7 @@ public class SubjectDao extends Dao {
 		return subject;
 	}
 
-	public Subject get3(String subjectCd,School school) throws Exception {
+	public Subject get(String subjectCd,School school) throws Exception {
 
 		// データベースへのコネクションを確立
 		Connection connection = getConnection();
@@ -110,7 +110,7 @@ public class SubjectDao extends Dao {
 			    subject.setSchool(schoolDao.get(rSet.getString("school_cd")));
 
 				// 科目インスタンスに検索結果をセット
-				subject.setSubjectCd(rSet.getString("cd"));
+				subject.setCd(rSet.getString("cd"));
 				subject.setName(rSet.getString("name"));
 
 			} else {
@@ -172,7 +172,7 @@ public class SubjectDao extends Dao {
 			    subject.setSchool(schoolDao.get(rSet.getString("school_cd")));
 
 				// 科目インスタンスに検索結果をセット
-				subject.setSubjectCd(rSet.getString("cd"));
+				subject.setCd(rSet.getString("cd"));
 				subject.setName(rSet.getString("name"));
 
 			} else {
@@ -219,7 +219,7 @@ public class SubjectDao extends Dao {
 				Subject subject = new Subject();
 				//科目インスタンスに検索結果をセット
 				subject.setSchool (school) ;
-				subject.setSubjectCd(rSet. getString("cd"));
+				subject.setCd(rSet. getString("cd"));
 				subject.setName(rSet. getString("name"));
 				//リストに追加
 				list.add(subject);
@@ -475,7 +475,7 @@ public class SubjectDao extends Dao {
 		HttpSession session = req.getSession();//セッション
 		Teacher teacher = (Teacher) session.getAttribute("user");// ログインユーザーを取得
 
-        Subject data = get3(subject.getSubjectCd(),teacher.getSchool());
+        Subject data = get(subject.getCd(),teacher.getSchool());
 
 		//コネクションを確立
 	    Connection connection = getConnection();
@@ -496,7 +496,7 @@ public class SubjectDao extends Dao {
 	            "insert into subject (school_cd, cd, name) values(?, ?, ?)");
 	            //プリペアードステートメントに値をバインド
 	            statement. setString(1, teacher.getSchool().getCd());
-	            statement. setString (2, subject. getSubjectCd ());
+	            statement. setString (2, subject. getCd ());
 	            statement. setString (3, subject. getName ());
 
 
@@ -510,7 +510,7 @@ public class SubjectDao extends Dao {
 	            //プリペアードステートメントに値をバインド
 	            statement. setString(1, subject. getName());
 	            statement. setString(2, teacher.getSchool().getCd());
-	            statement. setString (3, subject. getSubjectCd());
+	            statement. setString (3, subject. getCd());
 
 	        }
 	        //プリペアードステートメントを実行
@@ -562,7 +562,7 @@ public class SubjectDao extends Dao {
 
 	    try{
 	        //データベースから科目データを取得
-	        Subject data = get3(subject.getSubjectCd(), teacher.getSchool());
+	        Subject data = get(subject.getCd(), teacher.getSchool());
 
             //プリペアードステートメントにdelete文をセット
 	        if(data != null){
@@ -573,7 +573,7 @@ public class SubjectDao extends Dao {
             //プリペアードステートメントに値をバインド
             statement. setString(1, subject. getName ());
             statement. setString(2, teacher.getSchool (). getCd ());
-            statement. setString (3, subject. getSubjectCd ());
+            statement. setString (3, subject. getCd ());
 
 	        }
 

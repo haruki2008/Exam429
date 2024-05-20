@@ -7,7 +7,7 @@ public class Subject extends Teacher implements Serializable{
 
 
 	//科目ID
-	private String subjectCd;
+	private String cd;
 
 	//科目名
 	private String name;
@@ -20,12 +20,12 @@ public class Subject extends Teacher implements Serializable{
 	// ゲッター、セッター
 
 
-	public String getSubjectCd() {
-		return subjectCd;
+	public String getCd() {
+		return cd;
 	}
 
-	public void setSubjectCd(String subjectCd) {
-		this.subjectCd = subjectCd;
+	public void setCd(String subjectCd) {
+		this.cd = subjectCd;
 	}
 
 	public String getName() {
