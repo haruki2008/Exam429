@@ -32,7 +32,7 @@ public class TestDao extends Dao{
 			statement = connection.prepareStatement(baseSql + "student_no=? and subject_cd=? and school_cd=? and no=? ");
 			//プリペアードステートメントに学生番号をバインド
 			statement.setString(1, student.getNo());
-			statement.setString(2, subject.getCd());
+			statement.setString(2, subject.getSubjectCd());
 			statement.setString(3, school.getCd());
 			statement.setInt(4, no);
 			//プリペアードステートメントを実行
@@ -93,7 +93,7 @@ public class TestDao extends Dao{
 				test.setPoint(rSet.getInt("point"));
 				test.setNo(rSet.getInt("no"));
 				test.setClassNum(rSet.getString("class_num"));
-				test.setSubject(subjectDao.get(rSet.getString("subject_cd"), school));
+				test.setSubject(subjectDao.get3(rSet.getString("subject_cd"), school));
 				test.setSchool(school);
 				list.add(test);
 			}
@@ -126,11 +126,11 @@ public class TestDao extends Dao{
 		    											+ condition + order);
 
 		    //プリペアードステートメントに入学年度をバインド
-		    statement. setString(1, subject.getCd()) ;
+		    statement. setString(1, subject.getSubjectCd()) ;
 		  //プリペアードステートメントにクラス番号をバインド
 		    statement. setInt(2, num);
 		    //プリペアードステートメントに科目コードをバインド
-		    statement. setString(3, subject. getCd ());
+		    statement. setString(3, subject. getSubjectCd ());
 		    statement. setInt(4, num);
 		    statement. setInt(5, entYear);
 		    statement. setString(6, classNum);
@@ -220,7 +220,7 @@ public class TestDao extends Dao{
 							"insert into test (student_no, subject_cd, school_cd, no, point, class_num) values(?, ?, ?, ?, ?, ?) ");
 					//プリペアードステートメントに値をバインド
 					statement.setString(1, test.getStudent().getNo());
-					statement.setString(2, test.getSubject().getCd());
+					statement.setString(2, test.getSubject().getSubjectCd());
 					statement.setString(3, test.getSchool().getCd());
 					statement.setInt(4, test.getNo());
 					statement.setInt(5, test.getPoint());
@@ -233,7 +233,7 @@ public class TestDao extends Dao{
 					//プリペアードステートメントに値をバインド
 					statement.setInt(1, test.getPoint());
 					statement.setString(2, test.getStudent().getNo());
-					statement.setString(3, test.getSubject().getCd());
+					statement.setString(3, test.getSubject().getSubjectCd());
 					statement.setString(4, test.getSchool().getCd());
 					statement.setInt(5, test.getNo());
 				}
@@ -323,7 +323,7 @@ public class TestDao extends Dao{
 							"delete from test where student_no=? and subject_cd=? and school_cd=? and no=?");
 					//プリペアードステートメントに値をバインド
 					statement.setString(1, test.getStudent().getNo());
-					statement.setString(2, test.getSubject().getCd());
+					statement.setString(2, test.getSubject().getSubjectCd());
 					statement.setString(3, test.getSchool().getCd());
 					statement.setInt(4, test.getNo());
 				}

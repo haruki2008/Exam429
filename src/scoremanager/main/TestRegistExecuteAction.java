@@ -33,13 +33,13 @@ public class TestRegistExecuteAction extends Action{
 		String subjectCd = req.getParameter("f3");//科目コード
 		String Num = req.getParameter("f4");//回数
 		System.out.println(entYearStr + classNum + subjectCd + Num);
-		List<Test> list = tDao.filter(Integer.parseInt(entYearStr), classNum, subjectDao.get(subjectCd, teacher.getSchool()),Integer.parseInt(Num), teacher.getSchool());
+		List<Test> list = tDao.filter(Integer.parseInt(entYearStr), classNum, subjectDao.get3(subjectCd, teacher.getSchool()),Integer.parseInt(Num), teacher.getSchool());
 
 		for (Test test : list) {
 			String point =	req.getParameter("point_" + test.getStudent().getNo());
 			if (point != ""){
 				test.setPoint(Integer.parseInt(point));
-				test.setSubject(subjectDao.get(subjectCd, teacher.getSchool()));
+				test.setSubject(subjectDao.get3(subjectCd, teacher.getSchool()));
 				test.setNo(Integer.parseInt(Num));
 
 				if (Integer.parseInt(point) < 0 && Integer.parseInt(point) > 100){

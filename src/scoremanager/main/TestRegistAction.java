@@ -62,7 +62,7 @@ public class TestRegistAction extends Action{
 		// ログインユーザーの学校コードをもとにクラス番号の一覧を取得
 		List<String> list = cNumDao.filter(teacher.getSchool());
 
-		subject = sDao.get(subjectStr,sub.getSchool());
+		subject = sDao.get3(subjectStr,sub.getSchool());
 
 
 		if (entYearStr != null) {
