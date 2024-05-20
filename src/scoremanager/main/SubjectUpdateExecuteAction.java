@@ -34,7 +34,7 @@ public class SubjectUpdateExecuteAction extends Action {
 		Name = sDao.get2(name);
 
 		//DBからデータ取得 3
-		Subject subject = sDao.get3(cd,teacher.getSchool());// 科目IDから科目インスタンスを取得
+		Subject subject = sDao.get(cd,teacher.getSchool());// 科目IDから科目インスタンスを取得
 		List<String> list = sDao.filter2(teacher.getSchool());//ログインユーザーの学校コードをもとに科目IDの一覧を取得
 
 		//ビジネスロジック 4
@@ -48,7 +48,7 @@ public class SubjectUpdateExecuteAction extends Action {
 				errors.put("name", "入力した科目名は登録済みです");
 			}else{
 				subject.setName(name);
-				subject.setSubjectCd(cd);
+				subject.setCd(cd);
 				// 科目を保存
 				sDao.save(subject, req, res);
 			}

@@ -28,7 +28,7 @@ public class SubjectUpdateAction extends Action {
 		String cd = req.getParameter("cd");//科目ID
 
 		//DBからデータ取得 3
-		Subject subject = sDao.get3(cd,teacher.getSchool());//科目IDから科目インスタンスを取得
+		Subject subject = sDao.get(cd,teacher.getSchool());//科目IDから科目インスタンスを取得
 		List<String> list = sDao.filter2(teacher.getSchool());//ログインユーザーの学校コードをもとに科目IDの一覧を取得
 
 
@@ -38,7 +38,7 @@ public class SubjectUpdateAction extends Action {
 		//条件で手順4~6の内容が分岐
 		req.setAttribute("ent_data", list);
 		if (subject != null) {// 科目が存在していた場合
-			req.setAttribute("cd", subject.getSubjectCd());
+			req.setAttribute("cd", subject.getCd());
 			req.setAttribute("name", subject.getName());
 
 		} else {// 科目が1つもない

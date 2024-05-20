@@ -11,7 +11,7 @@
 
 <h2>成績管理</h2>
 <p>登録が完了しました</p>
-<a href="TestRegista.action">戻る</a>
+<a href="TestRegist.action">戻る</a>
 <a href="TestList.action">成績参照</a>
 
 </body>
