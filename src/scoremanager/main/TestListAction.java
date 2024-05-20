@@ -68,10 +68,6 @@ public class TestListAction extends Action{
 				//SubjectDaoのfilterメソッドを使ってJSPから引っ張ってきたデータをもとにSubject型の変数を取得
 
 				subject = subDao.get(subStr, teacher.getSchool());
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'master' of https://github.com/haruki2008/Exam429.git
 				//ログイン中の先生の所属校コードからSchool型のインスタンスを取得
 				school = sDao.get(teacher.getSchool().getCd());
 				//入学年度、クラス番号、科目名をもとに成績一覧を作成（入学年度、クラス、学生番号、氏名、回数）

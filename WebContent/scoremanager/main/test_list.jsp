@@ -44,7 +44,7 @@
 
 	<form method = "get">
 		<label>学生番号</label>
-		<input type="text" name="student_no" placeholder="学生番号を入力してください" value = "${student_no}">
+		<input type="text" name="student_no" placeholder="学生番号を入力してください" value = "${student_no}"required>
 		<input type="submit" value="検索">
 	</form>
 	<div>${error.get("founderorr")}</div>
@@ -80,6 +80,7 @@
 			<c:if test="${scores == null && stuscores == null}">検索してください</c:if>
 			<c:if test="${scores.size() == 0}">成績情報が存在しません</c:if>
 			<c:if test="${stuscores != null}">
+			<div>氏名：${stu.getName()}（${stu.getNo()}）</div>
 				<table class="table table-hover">
 				<tr>
 					<th>科目名</th>
