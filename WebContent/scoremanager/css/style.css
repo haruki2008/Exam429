@@ -115,9 +115,11 @@
 	margin: 0px 0px 0px 150px;
 }
 .menu {
-	position: relative;
+	/*position: relative;
 	margin-bottom: 160px;
-	left: 50px;
+	left: 50px;*/
+	float: right;
+
 }
 .strmenu {
 	background-color: #dcdcdc;
@@ -126,33 +128,15 @@
 }
 .menucon {
 	margin-right: 190px;
-	text-align: justify;
-	text-justify: distribute-all-lines;
 }
 .studentlist {
-	display: inline-block;
-	/*background-color: #dcdcdc;
-	width: 120px;
-	height: 100px;*/
-	text-align: center;
 
 }
 .testregist {
-	display: inline-block;
-	/*background-color: #dcdcdc;
-	width: 120px;
-	height: 100px;
-	position: relative;
-	bottom: 0px;*/
-	text-align: center;
+
 }
 .subject {
-	display: inline-block;
-	/*background-color: #dcdcdc;
-	width: 120px;
-	height: 100px;*/
 
-	text-align: center;
 }
 
 

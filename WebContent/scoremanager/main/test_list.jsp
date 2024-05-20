@@ -51,7 +51,6 @@
 	<c:choose>
 		<c:when test="${scores.size()>0}">
 			<div>科目：${sub.getName()}</div>
-
 			<table class="table table-hover">
 				<tr>
 					<th>入学年度</th>
@@ -79,6 +78,7 @@
 		</c:when>
 		<c:otherwise>
 			<c:if test="${scores == null && stuscores == null}">検索してください</c:if>
+			<c:if test="${scores.size() == 0}">成績情報が存在しません</c:if>
 			<c:if test="${stuscores != null}">
 				<table class="table table-hover">
 				<tr>
