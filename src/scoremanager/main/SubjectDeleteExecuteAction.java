@@ -30,7 +30,7 @@ public class SubjectDeleteExecuteAction extends Action {
 
 		//DBからデータ取得 3
 
-		Subject subject = sDao.get3(cd,teacher.getSchool());// 科目IDから科目インスタンスを取得
+		Subject subject = sDao.get(cd,teacher.getSchool());// 科目IDから科目インスタンスを取得
 
 		//ビジネスロジック 4
 		//DBへデータ保存 5
@@ -40,7 +40,7 @@ public class SubjectDeleteExecuteAction extends Action {
 			// インスタンスに値をセット
 
 				subject.setName(name);
-				subject.setSubjectCd(cd);
+				subject.setCd(cd);
 				// 科目を削除
 				sDao.delete(subject, req, res);
 

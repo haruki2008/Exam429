@@ -14,9 +14,7 @@
 
 <h1 class="system">得点管理システム</h1>
 
-<div class="sidebar">
-<c:import url = "./common/navigation.jsp" />
-</div>
+
 
 <div class="sub_r">
 
@@ -56,13 +54,13 @@
 				<c:forEach var="subject" items="${subjects}">
 					<tr>
 
-						<td>${subject.subjectCd}</td>
+						<td>${subject.cd}</td>
 
 						<td>${subject.name}</td>
 
-						<td><a href="SubjectUpdate.action?cd=${subject.subjectCd}">変更</a></td>
+						<td><a href="SubjectUpdate.action?cd=${subject.cd}">変更</a></td>
 
-						<td><a href="SubjectDelete.action?cd=${subject.subjectCd}">削除</a></td>
+						<td><a href="SubjectDelete.action?cd=${subject.cd}">削除</a></td>
 					</tr>
 				</c:forEach>
 			</table>

@@ -37,7 +37,7 @@ public class SubjectCreateExecuteAction extends Action {
 		name = req.getParameter("name");//科目名
 
 		//DBからデータ取得 3
-		subject = sDao.get3(cd,teacher.getSchool());// 科目IDから科目インスタンスを取得
+		subject = sDao.get(cd,teacher.getSchool());// 科目IDから科目インスタンスを取得
 		Name = sDao.get2(name); //科目名を取得
 
 		// ログインユーザーの学校コードをもとに科目IDの一覧を取得
@@ -63,7 +63,7 @@ public class SubjectCreateExecuteAction extends Action {
 			subject = new Subject();
 			// インスタンスに値をセット
 			subject.setSchool(teacher.getSchool());
-			subject.setSubjectCd(cd);
+			subject.setCd(cd);
 			subject.setName(name);
 
 			// 科目を保存
